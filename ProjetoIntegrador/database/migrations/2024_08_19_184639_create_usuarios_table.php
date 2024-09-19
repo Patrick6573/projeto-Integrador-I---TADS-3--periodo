@@ -3,7 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
-
+use Carbon\Carbon;
 return new class extends Migration
 {
     /**
@@ -11,18 +11,22 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('usuarios', function (Blueprint $table) {
-            $table->integer('id_usuario')->primary();
-            $table->string('nome_usuario', 50);
-            $table->string('email_usuario', 100);
-            $table->string('senha_usuario', 50);
-            $table->string('tipo_usuario', 20);
-            $table->date('data_nascimento_usuario')->nullable();
-            $table->date('data_cadastro_usuario');
-            $table->string('foto_usuario', 100)->nullable();
-            $table->string('status_conta', 50);
-            $table->integer('fk_telefone_usuario_id_telefone')->nullable()->index('fk_usuarios_2');
+        Schema::create('users', function (Blueprint $table) {
+            $table->uuid('id')->primary();
+            $table->string('name');
+            $table->string('email')->unique();
+            $table->string('password', 255);
+            $table->string('user_type')->default('PADRÂO');
+            $table->date('user_registration_date')->default(Carbon::today());
+            $table->string('user_photo', 100)->default('user_photo.jpg');
+            $table->string('account_status', 50)->default('ESPERA DE VERIFICAÇÂO EMAIL');
+            $table->uuid('fk_id_phone')->nullable()->index('fk_users_2');
+            $table->timestamp('email_verified_at')->nullable();            
+            $table->rememberToken();
+            $table->timestamps();
         });
+
+        
     }
 
     /**
@@ -30,6 +34,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('usuarios');
+        Schema::dropIfExists('users');
     }
 };

@@ -11,8 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('usuarios', function (Blueprint $table) {
-            $table->foreign(['fk_telefone_usuario_id_telefone'], 'FK_usuarios_2')->references(['id_telefone'])->on('telefone_usuario')->onUpdate('restrict')->onDelete('cascade');
+        Schema::table('users', function (Blueprint $table) {
+            $table->foreign(['fk_id_phone'], 'fk_users_2')->references(['id_phone'])->on('users_phone')->onUpdate('restrict')->onDelete('cascade');
         });
     }
 
@@ -21,8 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('usuarios', function (Blueprint $table) {
-            $table->dropForeign('FK_usuarios_2');
+        Schema::table('users', function (Blueprint $table) {
+            $table->dropForeign('fk_users_2');
         });
     }
 };

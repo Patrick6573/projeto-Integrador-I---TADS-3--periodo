@@ -11,9 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('mensagens', function (Blueprint $table) {
-            $table->foreign(['fk_usuarios_id_usuario_remetente'], 'FK_mensagens_2')->references(['id_usuario'])->on('usuarios')->onUpdate('restrict')->onDelete('restrict');
-            $table->foreign(['fk_usuarios_id_usuario_destinatario'], 'FK_mensagens_3')->references(['id_usuario'])->on('usuarios')->onUpdate('restrict')->onDelete('restrict');
+        Schema::table('menssages', function (Blueprint $table) {
+            $table->foreign(['fk_id_user_from'], 'fk_menssages_2')->references(['id'])->on('users')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreign(['fk_id_user_to'], 'fk_menssages_3')->references(['id'])->on('users')->onUpdate('cascade')->onDelete('cascade');
         });
     }
 
@@ -22,9 +22,9 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('mensagens', function (Blueprint $table) {
-            $table->dropForeign('FK_mensagens_2');
-            $table->dropForeign('FK_mensagens_3');
+        Schema::table('menssages', function (Blueprint $table) {
+            $table->dropForeign('fk_menssages_2');
+            $table->dropForeign('fk_menssages_3');
         });
     }
 };

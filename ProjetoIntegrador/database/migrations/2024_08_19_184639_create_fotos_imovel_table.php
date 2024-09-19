@@ -11,12 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('fotos_imovel', function (Blueprint $table) {
-            $table->date('data_envio')->nullable();
-            $table->string('url_foto', 100);
-            $table->integer('id_foto')->primary();
-            $table->time('hora_envio')->nullable();
-            $table->string('nome_foto', 100);
+        Schema::create('property_photos', function (Blueprint $table) {
+            $table->date('shipping_date')->nullable();
+            $table->string('photo_url', 100);
+            $table->uuid('id_photo')->primary();
+            $table->time('shipping_time')->nullable();
+            $table->string('name_photo', 100);
         });
     }
 
@@ -25,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('fotos_imovel');
+        Schema::dropIfExists('property_photos');
     }
 };

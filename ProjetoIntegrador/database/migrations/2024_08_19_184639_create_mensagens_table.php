@@ -11,16 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('mensagens', function (Blueprint $table) {
-            $table->integer('id_mensagem')->primary();
-            $table->date('data_envio');
-            $table->time('hora_envio');
-            $table->string('conteudo_mensagem', 500);
-            $table->time('hora_recebimento')->nullable();
-            $table->date('data_recebimento')->nullable();
-            $table->string('status_mensagem', 50)->nullable();
-            $table->integer('fk_usuarios_id_usuario_remetente')->nullable()->index('fk_mensagens_2');
-            $table->integer('fk_usuarios_id_usuario_destinatario')->nullable()->index('fk_mensagens_3');
+        Schema::create('menssages', function (Blueprint $table) {
+            $table->uuid('id_menssage')->primary();
+            $table->date('shipping_date');
+            $table->time('shipping_time');
+            $table->string('content_menssage', 500);
+            $table->time('time_received')->nullable();
+            $table->date('date_received')->nullable();
+            $table->uuid('fk_id_user_from')->nullable()->index('fk_menssages_2');
+            $table->uuid('fk_id_user_to')->nullable()->index('fk_menssages_3');
         });
     }
 
@@ -29,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('mensagens');
+        Schema::dropIfExists('menssages');
     }
 };

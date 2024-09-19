@@ -11,15 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('visitas', function (Blueprint $table) {
-            $table->integer('id_visita')->primary();
-            $table->date('data_visita');
-            $table->time('hora_visita');
-            $table->string('status_solicitacao', 50);
-            $table->string('status_visita', 50)->nullable();
-            $table->integer('fk_usuarios_id_visitante')->nullable()->index('fk_visitas_3');
-            $table->integer('fk_usuarios_id_proprietario')->nullable()->index('fk_visitas_2');
-            $table->integer('fk_imoveis_id_imovel')->nullable()->index('fk_visitas_4');
+        Schema::create('visits', function (Blueprint $table) {
+            $table->uuid('id_visit')->primary();
+            $table->date('date_visit');
+            $table->time('time_visit');
+            $table->string('request_status', 50);
+            $table->string('status_visit', 50)->nullable();
+            $table->uuid('fk_id_visitor')->nullable()->index('fk_visits_3');
+            $table->uuid('fk_id_owner')->nullable()->index('fk_visits_2');
+            $table->uuid('fk_id_property')->nullable()->index('fk_visits_4');
         });
     }
 
@@ -28,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('visitas');
+        Schema::dropIfExists('visits');
     }
 };

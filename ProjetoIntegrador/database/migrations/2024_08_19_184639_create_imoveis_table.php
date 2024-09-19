@@ -11,26 +11,26 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('imoveis', function (Blueprint $table) {
-            $table->integer('id_imovel')->primary();
-            $table->string('logradouro', 50);
-            $table->integer('numero');
-            $table->string('cep', 20);
-            $table->string('cidade', 50);
-            $table->string('estado', 20);
-            $table->string('complemento', 50)->nullable();
-            $table->string('ponto_referencia', 50)->nullable();
-            $table->integer('numero_quartos');
-            $table->integer('numero_banheiros');
-            $table->integer('tamanho_imovel');
-            $table->float('valor_aluguel');
-            $table->string('descricao_imovel', 500)->nullable();
-            $table->string('tipo_imovel', 50);
-            $table->string('status_imovel', 50);
-            $table->string('titulo_imovel', 50)->nullable();
-            $table->integer('fk_usuarios_id_usuario')->nullable()->index('fk_imoveis_4');
-            $table->integer('fk_videos_imovel_id_video')->nullable()->index('fk_imoveis_2');
-            $table->integer('fk_fotos_imovel_id_foto')->nullable()->index('fk_imoveis_3');
+        Schema::create('propertys', function (Blueprint $table) {
+            $table->uuid('id')->primary();
+            $table->string('street', 50);
+            $table->integer('number');
+            $table->string('zip_code', 20);
+            $table->string('city', 50);
+            $table->string('state', 20);
+            $table->string('complement', 50)->nullable();
+            $table->string('reference_point', 50)->nullable();
+            $table->integer('number_rooms');
+            $table->integer('number_bathrooms');
+            $table->integer('property_size');
+            $table->decimal('rental_value', 8,2);
+            $table->string('property_description', 500)->nullable();
+            $table->string('property_type', 50);
+            $table->string('property_status', 50);
+            $table->string('property_title', 50)->nullable();
+            $table->uuid('fk_id_user')->nullable()->index('fk_propertys_4');
+            $table->uuid('fk_id_video')->nullable()->index('fk_propertys_2');
+            $table->uuid('fk_id_photo')->nullable()->index('fk_propertys_3');
         });
     }
 
@@ -39,6 +39,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('imoveis');
+        Schema::dropIfExists('propertys');
     }
 };

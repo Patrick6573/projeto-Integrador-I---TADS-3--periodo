@@ -11,10 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('telefone_usuario', function (Blueprint $table) {
-            $table->integer('id_telefone')->primary();
-            $table->string('telefone_usuario', 20);
-            $table->string('telefone_usuario2', 20)->nullable();
+        Schema::create('users_phone', function (Blueprint $table) {
+            $table->uuid('id_phone')->primary();
+            $table->string('user_phone', 20)->nullable();
+            $table->string('user_phone2', 20);
         });
     }
 
@@ -23,6 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('telefone_usuario');
+        Schema::dropIfExists('users_phone');
     }
 };

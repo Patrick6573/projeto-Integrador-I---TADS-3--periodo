@@ -11,12 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('videos_imovel', function (Blueprint $table) {
-            $table->string('nome_video', 100);
-            $table->string('url_video', 100);
-            $table->date('data_envio')->nullable();
-            $table->integer('id_video')->primary();
-            $table->date('hora_envio')->nullable();
+        Schema::create('property_videos', function (Blueprint $table) {
+            $table->string('video_name', 100);
+            $table->string('video_url', 100);
+            $table->date('shipping_date')->nullable();
+            $table->uuid('id_video')->primary();
+            $table->time('shipping_time')->nullable();
         });
     }
 
@@ -25,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('videos_imovel');
+        Schema::dropIfExists('property_videos');
     }
 };

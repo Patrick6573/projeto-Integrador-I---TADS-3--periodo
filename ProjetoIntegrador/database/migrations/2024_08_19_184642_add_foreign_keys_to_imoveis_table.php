@@ -11,10 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('imoveis', function (Blueprint $table) {
-            $table->foreign(['fk_videos_imovel_id_video'], 'FK_imoveis_2')->references(['id_video'])->on('videos_imovel')->onUpdate('restrict')->onDelete('no action');
-            $table->foreign(['fk_fotos_imovel_id_foto'], 'FK_imoveis_3')->references(['id_foto'])->on('fotos_imovel')->onUpdate('restrict')->onDelete('no action');
-            $table->foreign(['fk_usuarios_id_usuario'], 'FK_imoveis_4')->references(['id_usuario'])->on('usuarios')->onUpdate('restrict')->onDelete('cascade');
+        Schema::table('propertys', function (Blueprint $table) {
+            $table->foreign(['fk_id_video'], 'fk_propertys_2')->references(['id_video'])->on('property_videos')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreign(['fk_id_photo'], 'fk_propertys_3')->references(['id_photo'])->on('property_photos')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreign(['fk_id_user'], 'fk_propertys_4')->references(['id'])->on('users')->onUpdate('cascade')->onDelete('cascade');
         });
     }
 
@@ -23,10 +23,10 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('imoveis', function (Blueprint $table) {
-            $table->dropForeign('FK_imoveis_2');
-            $table->dropForeign('FK_imoveis_3');
-            $table->dropForeign('FK_imoveis_4');
+        Schema::table('propertys', function (Blueprint $table) {
+            $table->dropForeign('fk_propertys_2');
+            $table->dropForeign('fk_propertys_3');
+            $table->dropForeign('fk_propertys_4');
         });
     }
 };
