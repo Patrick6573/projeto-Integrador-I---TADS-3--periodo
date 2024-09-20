@@ -6,7 +6,7 @@
 
 <div class="container mt-5">
     <h3 class="text-center mb-4">Cadastro de Casas</h3>
-    <form action="#" method="POST" class="shadow p-4 rounded bg-light mx-auto" style="max-width: 600px;">
+    <form action="/cadastroCasa" method="POST" class="shadow p-4 rounded bg-light mx-auto" style="max-width: 600px;">
         @csrf
 
         @if ($errors->any())
@@ -20,7 +20,7 @@
         @endif
 
         <div class="form-group">
-            <label for="street">Rua</label>
+            <label for="street">Logradouro</label>
             <input type="text" class="form-control form-control-sm" id="street" name="street" maxlength="50" placeholder="Ex: Rua das Flores" required>
         </div>
 
