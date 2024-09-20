@@ -11,8 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('users', function (Blueprint $table) {
-            $table->foreign(['fk_id_phone'], 'fk_users_2')->references(['id_phone'])->on('users_phone')->onUpdate('restrict')->onDelete('cascade');
+        Schema::table('users_phone', function (Blueprint $table) {
+            $table->foreign(['fk_id_user'], 'fk_users_phone')->references(['id'])->on('users')->onUpdate('cascade')->onDelete('cascade');
+        });
+        Schema::table('property_photos', function (Blueprint $table) {
+            $table->foreign(['fk_id_property'], 'fk_property_photos')->references(['id'])->on('propertys')->onUpdate('cascade')->onDelete('cascade');
+        });
+        Schema::table('property_videos', function (Blueprint $table) {
+            $table->foreign(['fk_id_property'], 'fk_property_videos')->references(['id'])->on('propertys')->onUpdate('cascade')->onDelete('cascade');
         });
     }
 
@@ -21,8 +27,14 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('users', function (Blueprint $table) {
-            $table->dropForeign('fk_users_2');
+        Schema::table('users_phone', function (Blueprint $table) {
+            $table->dropForeign('fk_users_phone');
+        });
+        Schema::table('property_photos', function (Blueprint $table) {
+            $table->dropForeign('fk_property_photos');
+        });
+        Schema::table('property_photos', function (Blueprint $table) {
+            $table->dropForeign('fk_property_videos');
         });
     }
 };

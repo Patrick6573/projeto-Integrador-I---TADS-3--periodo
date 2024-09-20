@@ -17,6 +17,7 @@ return new class extends Migration
             $table->uuid('id_photo')->primary();
             $table->time('shipping_time')->nullable();
             $table->string('name_photo', 100);
+            $table->uuid('fk_id_property')->nullable()->index('fk_property_photos');
         });
     }
 

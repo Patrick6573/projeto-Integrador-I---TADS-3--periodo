@@ -19,8 +19,6 @@ return new class extends Migration
             $table->string('user_type')->default('PADRÂO');
             $table->date('user_registration_date')->default(Carbon::today());
             $table->string('user_photo', 100)->default('user_photo.jpg');
-            $table->string('account_status', 50)->default('ESPERA DE VERIFICAÇÂO EMAIL');
-            $table->uuid('fk_id_phone')->nullable()->index('fk_users_2');
             $table->timestamp('email_verified_at')->nullable();            
             $table->rememberToken();
             $table->timestamps();

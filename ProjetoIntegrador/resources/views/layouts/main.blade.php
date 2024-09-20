@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang=""{{ str_replace('_', '-', app()->getLocale()) }}"">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -80,7 +80,7 @@
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
+    <div class="navbar-collapse" id="navbarNav">
       <ul class="navbar-nav ms-auto">
         <li class="nav-item">
           <a class="nav-link active" aria-current="page" href="/dashboard">Home</a>
@@ -88,6 +88,7 @@
         <li class="nav-item">
           <a class="nav-link active" aria-current="page" href="cadastroCasa">Anuncie seu Imovel</a>
         </li>
+        
         @auth
           <li class="nav-item">
             <div class="hidden sm:flex sm:items-center sm:ms-6">

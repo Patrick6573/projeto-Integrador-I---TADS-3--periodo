@@ -12,8 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('propertys', function (Blueprint $table) {
-            $table->foreign(['fk_id_video'], 'fk_propertys_2')->references(['id_video'])->on('property_videos')->onUpdate('cascade')->onDelete('cascade');
-            $table->foreign(['fk_id_photo'], 'fk_propertys_3')->references(['id_photo'])->on('property_photos')->onUpdate('cascade')->onDelete('cascade');
+        
             $table->foreign(['fk_id_user'], 'fk_propertys_4')->references(['id'])->on('users')->onUpdate('cascade')->onDelete('cascade');
         });
     }
@@ -24,8 +23,7 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('propertys', function (Blueprint $table) {
-            $table->dropForeign('fk_propertys_2');
-            $table->dropForeign('fk_propertys_3');
+            
             $table->dropForeign('fk_propertys_4');
         });
     }

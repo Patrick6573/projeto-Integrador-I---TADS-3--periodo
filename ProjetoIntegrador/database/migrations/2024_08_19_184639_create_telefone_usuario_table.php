@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('users_phone', function (Blueprint $table) {
             $table->uuid('id_phone')->primary();
-            $table->string('user_phone', 20)->nullable();
-            $table->string('user_phone2', 20);
+            $table->string('user_phone', 20);
+            $table->uuid('fk_id_user')->nullable()->index('fk_users_phone');
         });
     }
 

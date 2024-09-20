@@ -17,6 +17,7 @@ return new class extends Migration
             $table->date('shipping_date')->nullable();
             $table->uuid('id_video')->primary();
             $table->time('shipping_time')->nullable();
+            $table->uuid('fk_id_property')->nullable()->index('fk_property_videos');
         });
     }
 

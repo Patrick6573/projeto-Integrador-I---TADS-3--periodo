@@ -29,8 +29,7 @@ return new class extends Migration
             $table->string('property_status', 50);
             $table->string('property_title', 50)->nullable();
             $table->uuid('fk_id_user')->nullable()->index('fk_propertys_4');
-            $table->uuid('fk_id_video')->nullable()->index('fk_propertys_2');
-            $table->uuid('fk_id_photo')->nullable()->index('fk_propertys_3');
+
         });
     }
 

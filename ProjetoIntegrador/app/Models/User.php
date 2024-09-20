@@ -11,17 +11,6 @@ class User extends Authenticatable implements MustVerifyEmail
 {
     use HasFactory, Notifiable;
 
-    public static function boot()
-    {
-        parent::boot();
-
-        // Adiciona um UUID automaticamente ao criar um novo registro
-        static::creating(function ($model) {
-            if (empty($model->id)) {
-                $model->id = Str::uuid()->toString();
-            }
-        });
-    }
 
     // Garanta que o campo `id` é tratado como string
     protected $keyType = 'string';
@@ -33,15 +22,13 @@ class User extends Authenticatable implements MustVerifyEmail
      * @var array<int, string>
      */
     protected $fillable = [
+        'id',
         'name',
         'email',
         'password',
         'user_type',
         'user_registration_date',
         'user_photo',
-        'account_status',
-        'fk_id_phone',
-
     ];
 
     /**
@@ -65,5 +52,9 @@ class User extends Authenticatable implements MustVerifyEmail
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    public function user(){
+        return $this->belongsTo('App\Models\User');
     }
 }
