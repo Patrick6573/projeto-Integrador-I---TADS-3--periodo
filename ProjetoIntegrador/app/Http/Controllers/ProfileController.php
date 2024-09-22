@@ -14,28 +14,73 @@ class ProfileController extends Controller
     /**
      * Display the user's profile form.
      */
-    public function edit(Request $request): View
-    {
-        return view('profile.edit', [
-            'user' => $request->user(),
-        ]);
-    }
+
+     public function edit(Request $request): View
+{
+    $user = $request->user()->load('phones'); // Carrega o usuário com seus telefones
+    return view('profile.edit', [
+        'user' => $user,
+    ]);
+}
+
+
 
     /**
      * Update the user's profile information.
      */
     public function update(ProfileUpdateRequest $request): RedirectResponse
     {
+        // Atualiza os dados do usuário
         $request->user()->fill($request->validated());
 
+        // Verifica se o e-mail foi alterado e marca como não verificado
         if ($request->user()->isDirty('email')) {
             $request->user()->email_verified_at = null;
         }
 
+        if ($request->hasFile('user_photo') && $request->file('user_photo')->isValid()) {
+        
+            // Se o usuário já tiver uma foto de perfil, exclua a antiga
+            if ($request->user()->user_photo && file_exists(public_path("profile_photos/{$request->user()->user_photo}"))) {
+                unlink(public_path("profile_photos/{$request->user()->user_photo}"));
+            }
+        
+            // Capturando a extensão do arquivo enviado
+            $extension = $request->user_photo->extension();
+            
+            // Gerando um novo nome de arquivo único
+            $imageName = md5($request->user_photo->getClientOriginalName() . strtotime('now')) . '.' . $extension;
+            
+            // Movendo o arquivo para a pasta 'profile_photos' dentro do diretório 'public'
+            $request->user_photo->move(public_path("profile_photos"), $imageName);
+            
+            // Atualizando o campo 'user_photo' no banco de dados com o novo nome do arquivo
+            $request->user()->user_photo = $imageName;
+        }
+        
+
+        // Salva o usuário atualizado
         $request->user()->save();
+
+        // Atualiza os telefones
+        if ($request->has('phones')) {
+            // Deleta os telefones antigos
+            $request->user()->phones()->delete();
+
+            // Salva os novos telefones
+            foreach ($request->input('phones') as $phoneNumber) {
+                $request->user()->phones()->create([
+                    'user_phone' => $phoneNumber,
+                ]);
+            }
+
+        }
 
         return Redirect::route('profile.edit')->with('status', 'profile-updated');
     }
+
+
+
 
     /**
      * Delete the user's account.

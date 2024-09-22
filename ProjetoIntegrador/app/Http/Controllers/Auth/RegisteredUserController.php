@@ -45,11 +45,21 @@ class RegisteredUserController extends Controller
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
-           
         ]);
+        if($request->hasFile('user_photo') && $request->file('user_photo')->isValid() ){
+
+            $extension = $request->user_photo->extension();
+            $imageName = md5($request->user_photo->getClientOriginalName() . strtotime('now')) . '.' . $extension;
+            $request->user_photo->move(public_path("profile_photos"), $imageName);
+            $user->user_photo = $imageName;
+        }
+        $user->save();
+
         
         event(new Registered($user));
         Auth::login($user);
+
+        //Salvando telefone que o usuario colocou no formulario de registro
         $phoneSave = new UserPhoneController;
         $phoneSave->storePhone($request);
 

@@ -1,15 +1,15 @@
 <x-guest-layout>
-    <form method="POST" action="{{ route('register') }}">
+    <form method="POST" action="{{ route('register') }}" enctype="multipart/form-data">
         @csrf
 
-        <!-- Name -->
+        
         <div>
             <x-input-label for="name" :value="__('Name')" />
             <x-text-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus autocomplete="name" />
             <x-input-error :messages="$errors->get('name')" class="mt-2" />
         </div>
 
-        <!-- Email Address -->
+        
         <div class="mt-4">
             <x-input-label for="email" :value="__('Email')" />
             <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autocomplete="username" />
@@ -17,16 +17,27 @@
         </div>
         <div class="mt-4">
             <x-input-label for="user_phone1" :value="__('Telefone 1')" />
-            <x-text-input id="user_phone1" class="block mt-1 w-full" type="text" name="user_phone1" :value="old('user_phone1')" required autocomplete="username" />
+            <x-text-input id="user_phone1" class="block mt-1 w-full" 
+                            type="text" name="user_phone1" 
+                            :value="old('user_phone1')" required />
             
         </div>
         <div class="mt-4">
             <x-input-label for="user_phone2" :value="__('Telefone 2')" />
-            <x-text-input id="user_phone2" class="block mt-1 w-full" type="text" name="user_phone2" :value="old('user_phone2')"  autocomplete="username" />
+            <x-text-input id="user_phone2" class="block mt-1 w-full" 
+                            type="text" name="user_phone2" 
+                            :value="old('user_phone2')"   />
+            
+        </div>
+        <div class="mt-4">
+            <x-input-label for="user_photo" :value="__('Foto de Perfil')" />
+            <x-text-input id="user_photo" class="block mt-1 w-full" 
+                            type="file" name="user_photo" 
+                            accept="image/*" :value="old('user_photo')"   />
             
         </div>
 
-        <!-- Password -->
+        
         <div class="mt-4">
             <x-input-label for="password" :value="__('Password')" />
 
@@ -38,7 +49,7 @@
             <x-input-error :messages="$errors->get('password')" class="mt-2" />
         </div>
 
-        <!-- Confirm Password -->
+        
         <div class="mt-4">
             <x-input-label for="password_confirmation" :value="__('Confirm Password')" />
 
