@@ -13,7 +13,6 @@ return new class extends Migration
     {
         Schema::create('property_videos', function (Blueprint $table) {
             $table->string('video_name', 100);
-            $table->string('video_url', 100);
             $table->date('shipping_date')->nullable();
             $table->uuid('id_video')->primary();
             $table->time('shipping_time')->nullable();
