@@ -144,6 +144,7 @@
   <a href="/dashboard">Logo</a>
   <a href="minhasCasas">Minhas Casas</a>
   <a href="minhasVisitas">Minhas Visitas</a>
+  <a href="chats">Conversas</a>
 </div>
 
   <div class="content">
