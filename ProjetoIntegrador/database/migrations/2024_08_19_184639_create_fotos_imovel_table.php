@@ -13,11 +13,19 @@ return new class extends Migration
     {
         Schema::create('property_photos', function (Blueprint $table) {
             $table->date('shipping_date')->nullable();
-            $table->string('photo_url', 100);
             $table->uuid('id_photo')->primary();
+            $table->string('type_photo')->default("Foto Secundaria");
             $table->time('shipping_time')->nullable();
             $table->string('name_photo', 100);
             $table->uuid('fk_id_property')->nullable()->index('fk_property_photos');
+            //$table->string('image'); // Campo para o nome da imagem
+
+            //$table->uuid('id_photo')->primary();
+            //$table->uuid('fk_id_property')->nullable()->index('fk_property_photos');
+            //$table->string('name_photo', 100);
+            //$table->string('type_photo')->default("Foto Secundaria");
+            //$table->date('shipping_date')->nullable();
+            //$table->time('shipping_time')->nullable();
         });
     }
 

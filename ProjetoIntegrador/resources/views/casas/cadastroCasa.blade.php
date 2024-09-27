@@ -4,9 +4,21 @@
 
 @section('content')
 
+@if (session('success'))
+    <div class="alert alert-success">
+        {{ session('success') }}
+    </div>
+@endif
+
+@if (session('error'))
+    <div class="alert alert-danger">
+        {{ session('error') }}
+    </div>
+@endif
+
 <div class="container mt-5">
     <h3 class="text-center mb-4">Cadastro de Casas</h3>
-    <form action="/cadastroCasa" method="POST" class="shadow p-4 rounded bg-light mx-auto" style="max-width: 600px;">
+    <form action="/cadastroCasa" method="POST" class="shadow p-4 rounded bg-light mx-auto" style="max-width: 600px;" enctype="multipart/form-data">
         @csrf
 
         @if ($errors->any())
@@ -96,6 +108,11 @@
             <label for="property_title">Título do Imóvel</label>
             <input type="text" class="form-control form-control-sm" id="property_title" name="property_title" maxlength="50" placeholder="Ex: Linda Casa de Praia">
         </div>
+        <div class="form-group">
+            <label for="image">Foto principal:</label>
+            <input type="file" class="form-control-file" id="image" name="image">
+        </div>
+
 
         <button type="submit" class="btn btn-primary btn-block">Cadastrar</button>
     </form>
