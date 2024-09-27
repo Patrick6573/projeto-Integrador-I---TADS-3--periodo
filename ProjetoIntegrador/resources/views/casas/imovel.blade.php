@@ -4,6 +4,6 @@
 
 @section('content')
 
-    <h1>Mostrar Imovel especifico</h1>    
+   <h1>imovel especifico</h1>
 
 @endsection

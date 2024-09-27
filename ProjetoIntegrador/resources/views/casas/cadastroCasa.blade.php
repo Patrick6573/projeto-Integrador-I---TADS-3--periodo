@@ -114,7 +114,7 @@
         </div>
 
 
-        <button type="submit" class="btn btn-primary btn-block">Cadastrar</button>
+        <button type="submit" class="btn btn-primary btn-block">Enviar</button>
     </form>
 </div>
 @endsection

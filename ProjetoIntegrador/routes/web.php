@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\VisitaController;
 use App\Http\Controllers\CadastroCasaController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Property_photosController;
