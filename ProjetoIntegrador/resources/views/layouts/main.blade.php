@@ -167,10 +167,11 @@
 
 
 </script>
-        
-        
-          <a href="/exibirform" class="nav-link">Teste de rota visita</a>
-        
+
+<!--lugar para botoes de teste para exibir os formularios-->
+<a href="/exibirform" class="nav-link">Teste de rota visita</a>  
+
+<a href="visitas.edit" class="btn btn-warning">Editar</a>
 
 </body>
 </html>

@@ -68,10 +68,15 @@ class CadastroCasaController extends Controller
             $cadastroCasa->save();
             $cadastroCasa->refresh();
             
-            if (!$cadastroCasa->exists) {
+            $cadastroCasa->save();
+
+            if ($cadastroCasa->wasRecentlyCreated) {
+                Log::info('Casa cadastrada com sucesso: ' . $cadastroCasa->id);
+            } else {
                 Log::error('Erro: A casa não foi salva corretamente.');
                 return redirect()->back()->with('error', 'Erro ao cadastrar a casa. Tente novamente.');
             }
+            
     
             // Salva a foto no banco
             if ($request->hasFile('image') && $request->file('image')->isValid()) {
