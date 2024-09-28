@@ -15,7 +15,7 @@ class CadastroCasa extends Model
     protected $keyType = 'string'; // Define o tipo da chave como string para UUID
 
     protected $fillable = [
-        'id', // Chave primária
+        'id', 
         'street',
         'number',
         'zip_code',

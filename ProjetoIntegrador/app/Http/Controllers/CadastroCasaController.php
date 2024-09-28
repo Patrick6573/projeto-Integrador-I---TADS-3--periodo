@@ -3,11 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Models\CadastroCasa;
+use App\Models\Property_videos;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use App\Models\Property_photos;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Auth;
 
 class CadastroCasaController extends Controller
 {
@@ -48,7 +50,7 @@ class CadastroCasaController extends Controller
         try {
             $cadastroCasa = new CadastroCasa;
             $cadastroCasa->id = Str::uuid()->toString(); // Define UUID como ID
-            //dd($cadastroCasa);
+            $cadastroCasa->fk_id_user = Auth::id();
             $cadastroCasa->street = $request->street;
             $cadastroCasa->number = $request->number;
             $cadastroCasa->zip_code = $request->zip_code;
@@ -111,6 +113,8 @@ class CadastroCasaController extends Controller
 
                 $photos->name_photo = $imageName; 
 
+                $photos->type_photo = "FOTO PRIMÁRIA";
+
                 $photos->save();
             }
             Log::info('Redirecionando para a página inicial com mensagem de sucesso.');
@@ -122,5 +126,97 @@ class CadastroCasaController extends Controller
             Log::error('Erro ao cadastrar casa: ' . $e->getMessage());
             return redirect()->back()->with('error', 'Ocorreu um erro ao cadastrar a casa. Tente novamente.');
         }     
+    }
+    //Função para inserir fotos e vídeos
+    public function casaMidia(Request $request, $id){
+        // Validação para imagens e vídeos
+        $request->validate([
+            'images.*' => 'image|mimes:jpeg,png,jpg,gif|max:2048', // Limite de 2MB por imagem
+            'videos.*' => 'mimetypes:video/avi,video/mpeg,video/mp4|max:50000', // Limite de 50MB por vídeo
+        ]);
+      
+        // Upload das fotos secundárias
+      
+        if ($request->hasFile('images')) {
+                
+            foreach ($request->file('images') as $image) {
+                    
+                if ($image->isValid()) {
+                        
+                    // Processar cada imagem 
+                                                
+                    $extension = $image->extension();
+                    
+                    $imageName = md5($image->getClientOriginalName() . time()) . '.' . $extension;
+                    
+                    // Mover a imagem para o diretório público     
+                            
+                    $image->move(public_path('img/casas'), $imageName);
+                            
+                    // Salvar os dados da imagem no banco de dados                    
+                            
+                    $photo = new Property_photos;
+            
+                    $photo->id_photo = Str::uuid()->toString();
+                
+                    $photo->fk_id_property = $id; // O ID da casa
+            
+                    $photo->shipping_date = now();
+
+                    $photo->shipping_time = now()->toTimeString();
+                
+                    $photo->name_photo = $imageName;
+
+                    $photo->save();
+                    
+                }
+            }
+        }
+        // Upload dos vídeos
+        if ($request->hasFile('videos')) {
+        
+      
+            foreach ($request->file('videos') as $video) {
+                        
+                    
+                if ($video->isValid()) {
+                            
+                    // Processar cada vídeo
+                                        
+                    $extension = $video->extension();
+                                    
+                    $videoName = md5($video->getClientOriginalName() . time()) . '.' . $extension;
+                            
+                    // Mover o vídeo para o diretório público
+                
+                    $video->move(public_path('videos/casas'), $videoName);
+                    
+                    // Salvar os dados do vídeo no banco de dados
+                    
+                    $media = new Property_videos();
+
+                    $media->id_video = Str::uuid()->toString();
+
+                    $media->fk_id_property = $id; // O ID da casa
+                    
+                    $media->shipping_date = now();
+
+                    $media->shipping_time = now()->toTimeString();
+                    
+                    $media->video_name = $videoName;
+            
+                    $media->save();
+                    Log::error('Video não foi salvo: ' . $videoName);
+                }
+            }
+        }
+        return redirect()->back()->with('success', 'Fotos e vídeos carregados com sucesso.');
+    }
+
+    public function destroy($id){
+        $casa = CadastroCasa::findOrFail($id);
+        $casa->delete();
+
+        return redirect('/dashboard')->with('msg','Casa deletada com sucesso');
     }
 }

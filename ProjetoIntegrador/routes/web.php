@@ -46,7 +46,8 @@ Route::middleware('auth:sanctum')->group(function () {
 });
 //Rota para o cadastro casa
 Route::post('/cadastroCasa',[CadastroCasaController::class,'cadastro'] );
-
+//Rota para deletar um cadastro de casa
+Route::delete('/minhasCasas/{id}',[CadastroCasaController::class , 'destroy']);
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();

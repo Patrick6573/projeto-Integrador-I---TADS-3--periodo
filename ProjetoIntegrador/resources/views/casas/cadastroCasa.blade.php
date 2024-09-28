@@ -108,11 +108,21 @@
             <label for="property_title">Título do Imóvel</label>
             <input type="text" class="form-control form-control-sm" id="property_title" name="property_title" maxlength="50" placeholder="Ex: Linda Casa de Praia">
         </div>
+        
         <div class="form-group">
-            <label for="image">Foto principal:</label>
+            <label for="image">Foto Primária:</label>
             <input type="file" class="form-control-file" id="image" name="image">
         </div>
 
+        <div class="form-group">
+            <label for="secondary-images">Fotos Secundárias:</label>
+            <input type="file" class="form-control-file" id="secondary-images" name="images[]" multiple>
+        </div>
+
+        <div class="form-group">
+            <label for="videos">Vídeos:</label>
+            <input type="file" class="form-control-file" id="videos" name="videos[]" multiple>
+        </div>
 
         <button type="submit" class="btn btn-primary btn-block">Cadastrar</button>
     </form>
