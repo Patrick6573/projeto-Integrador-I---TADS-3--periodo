@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\VisitaController;
 use App\Http\Controllers\CadastroCasaController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Property_photosController;
@@ -14,6 +15,18 @@ use Illuminate\Http\Request;
 Route::get('/', function () {
     return view('welcome');
 });
+
+//TESTE 2 ROTA VISITA//
+Route::get('/exibirform/{idCasa}', [VisitaController::class, 'exibirFormulario']);
+Route::post('/visit/{idCasa}', [VisitaController::class, 'solicitarVisita']);
+
+//update dados visita
+Route::get('/visitas/{id}/editar', [VisitaController::class, 'edit'])->name('visitas.edit');
+
+Route::post('/visitas/{id}/atualizar', [VisitaController::class, 'update'])->name('visitas.update');
+// Exibir solicitações de visita para o dono da casa
+
+Route::get('/minhasvisitas', [VisitaController::class, 'exibirSolicitacoes'])->name('minhas.visitas');
 
 Route::get('/dashboard', function () {
     return view('dashboard');

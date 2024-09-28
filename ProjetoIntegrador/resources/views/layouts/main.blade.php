@@ -92,7 +92,7 @@
         @auth
           <li class="nav-item">
             <div class="hidden sm:flex sm:items-center sm:ms-6">
-              <x-dropdown align="right" width="48">
+              <x-dropdown aling="right" width="48">
                   <x-slot name="trigger">
                       <button class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150">
                           <div>{{ Auth::user()->name }}</div>
@@ -131,6 +131,7 @@
           <li class="nav-item">
             <a href="/register" class="nav-link">Cadastrar</a>
           </li>
+        
         @endguest
         </li>
       </ul>
@@ -163,7 +164,15 @@
     var sidebar = document.getElementById("sidebar");
     sidebar.classList.remove("show");
   });
+
+
 </script>
+
+<!--lugar para botoes de teste para exibir os formularios-->
+<a href="/exibirform" class="nav-link">Teste de rota visita</a>  
+
+<a href="visitas.edit" class="btn btn-warning">Editar</a>
 
 </body>
 </html>
+
