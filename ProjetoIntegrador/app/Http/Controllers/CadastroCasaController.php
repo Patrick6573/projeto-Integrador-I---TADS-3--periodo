@@ -139,7 +139,7 @@ class CadastroCasaController extends Controller
             'images.*' => 'image|mimes:jpeg,png,jpg,gif|max:2048', // Limite de 2MB por imagem
             'videos.*' => 'mimetypes:video/avi,video/mpeg,video/mp4|max:50000', // Limite de 50MB por vídeo
         ]);
-      
+        
         // Upload das fotos secundárias
       
         if ($request->hasFile('images')) {

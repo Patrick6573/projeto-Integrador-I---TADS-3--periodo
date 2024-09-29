@@ -16,17 +16,23 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-//TESTE 2 ROTA VISITA//
-Route::get('/exibirform/{idCasa}', [VisitaController::class, 'exibirFormulario']);
-Route::post('/visit/{idCasa}', [VisitaController::class, 'solicitarVisita']);
 
-//update dados visita
-Route::get('/visitas/{id}/editar', [VisitaController::class, 'edit'])->name('visitas.edit');
+//ROTA VISITA//
+//Route::get('/exibirform/{idCasa}', [VisitaController::class, 'showFormVisit']);
+Route::post('/enviarVisita/{id}', [VisitaController::class, 'solicitarVisit']);
 
-Route::post('/visitas/{id}/atualizar', [VisitaController::class, 'update'])->name('visitas.update');
-// Exibir solicitações de visita para o dono da casa
+Route::get('/editarVisita/{id}/editar', [VisitaController::class, 'edit'])->name('visitas.edit');
+Route::post('/enviarVisitaEdit/{id}/atualizar', [VisitaController::class, 'update'])->name('visitas.update');
 
-Route::get('/minhasvisitas', [VisitaController::class, 'exibirSolicitacoes'])->name('minhas.visitas');
+
+Route::get('/minhasvisitas', [VisitaController::class, 'showSolicitacion'])->name('minhas.visitas');
+
+Route::post('/aceitarVisita/{id}', [VisitaController::class, 'acceptVisit'])->name('aceitar.visita');
+Route::post('/rejeitarVisita/{id}', [VisitaController::class, 'rejeitarVisit'])->name('rejeitar.visita');
+
+Route::post('/visitas/{id}/cancelar', [VisitaController::class, 'cancelarVisita'])->name('visitas.cancelar');
+
+
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -34,6 +40,13 @@ Route::get('/dashboard', function () {
 
 
 Route::middleware('auth:sanctum')->group(function () {
+   
+   //novo teste exibir form//
+   Route::get('/exibirForm{id}', function () {
+        return view('casas.formSolicitarVisit');
+    });
+   //////////////////
+   
     Route::get('/cadastroCasa', function () {
         return view('casas/cadastroCasa');
     });
@@ -47,7 +60,7 @@ Route::middleware('auth:sanctum')->group(function () {
         return view('casas/casa');
     });
     Route::get('/minhasVisitas', function () {
-        return view('casas/minhasVisitas');
+        return view('casas.minhasVisitas');
     });
     Route::get('/chats', function () {
         return Inertia::render('ChatComponent'); 

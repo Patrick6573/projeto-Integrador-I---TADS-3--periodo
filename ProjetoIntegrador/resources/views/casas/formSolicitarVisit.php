@@ -5,8 +5,7 @@
 @section('content')
 
 <div class="container mt-5">
-<form action="{{ route('visit', $casa->id) }}" method="POST" class="shadow p-4 rounded bg-light mx-auto" style="max-width: 600px">
-
+    <form action="{{ route('enviarVisit', $casa->id{1}) }}" method="POST" class="shadow p-4 rounded bg-light mx-auto" style="max-width: 600px">
         @csrf
 
         @if ($errors->any())
@@ -20,13 +19,13 @@
         @endif
 
         <div class="form-group">
-            <label for="data_visita">Data desejada:</label>
-            <input type="date" class="form-control form-control-sm" id="data_visita" name="data_visita" required>
+            <label for="date_visit">Data desejada:</label>
+            <input type="date" class="form-control form-control-sm" id="date_visit" name="date_visit" required>
         </div>
 
         <div class="form-group">
-            <label for="hora_visita">Hora desejada:</label>
-            <input type="time" class="form-control form-control-sm" id="hora_visita" name="hora_visita" required>
+            <label for="time_visit">Hora desejada:</label>
+            <input type="time" class="form-control form-control-sm" id="time_visit" name="time_visit" required>
         </div>
 
         <button type="submit" class="btn btn-primary btn-block">Enviar</button>

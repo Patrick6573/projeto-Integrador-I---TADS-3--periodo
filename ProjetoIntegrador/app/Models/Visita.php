@@ -9,15 +9,19 @@ class Visita extends Model{
     use HasFactory;
 
     // Nome da tabela no banco de dados
-    protected $table = 'visitas';
+    protected $table = 'visits';
 
     // Permitir atribuição em massa para os campos especificados
     protected $fillable = [
-        'data_visita',
-        'hora_visita',
-        'status',
-        'user_id',
-        'casa_id',
+        'id_visit',
+        'date_visit',
+        'time_visit',
+        'status_visit',
+    //    'date_visit',
+    //    'time_visit',
+    //    'status_visit',
+    //    'user_id',
+     //   'casa_id',
     ];
 // Relação com o usuário que solicitou a visita
 public function usuario()

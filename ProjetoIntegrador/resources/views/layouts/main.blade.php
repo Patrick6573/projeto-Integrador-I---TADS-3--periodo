@@ -88,6 +88,10 @@
         <li class="nav-item">
           <a class="nav-link active" aria-current="page" href="cadastroCasa">Anuncie seu Imovel</a>
         </li>
+        <!---teste rota form-->
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="exibirForm{id}">fazer uma visita</a>
+        </li>
         
         @auth
           <li class="nav-item">
@@ -171,7 +175,10 @@
 <!--lugar para botoes de teste para exibir os formularios-->
 <a href="/exibirform" class="nav-link">Teste de rota visita</a>  
 
-<a href="visitas.edit" class="btn btn-warning">Editar</a>
+<a href="editarvisita" class="btn btn-warning">Editar</a>
+
+
+</form>
 
 </body>
 </html>
