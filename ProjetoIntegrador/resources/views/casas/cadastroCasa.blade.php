@@ -111,17 +111,17 @@
         
         <div class="form-group">
             <label for="image">Foto Primária:</label>
-            <input type="file" class="form-control-file" id="image" name="image">
+            <input type="file" class="form-control-file" id="image" name="image" accept="image/*">
         </div>
 
         <div class="form-group">
             <label for="secondary-images">Fotos Secundárias:</label>
-            <input type="file" class="form-control-file" id="secondary-images" name="images[]" multiple>
+            <input type="file" class="form-control-file" id="secondary-images" name="images[]" multiple accept="image/*">
         </div>
 
         <div class="form-group">
             <label for="videos">Vídeos:</label>
-            <input type="file" class="form-control-file" id="videos" name="videos[]" multiple>
+            <input type="file" class="form-control-file" id="videos" name="videos[]" multiple accept="video/*">
         </div>
 
         <button type="submit" class="btn btn-primary btn-block">Enviar</button>

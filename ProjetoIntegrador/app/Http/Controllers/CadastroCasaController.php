@@ -69,8 +69,6 @@ class CadastroCasaController extends Controller
             
             $cadastroCasa->save();
             $cadastroCasa->refresh();
-            
-            $cadastroCasa->save();
 
             if ($cadastroCasa->wasRecentlyCreated) {
                 Log::info('Casa cadastrada com sucesso: ' . $cadastroCasa->id);
@@ -122,6 +120,9 @@ class CadastroCasaController extends Controller
 
                 $photos->save();
             }
+
+            $this->casaMidia($request, $cadastroCasa->id);
+
             Log::info('Redirecionando para a página inicial com mensagem de sucesso.');
 
             return redirect('/')->with('success', 'Casa cadastrada com sucesso!');   
@@ -211,7 +212,11 @@ class CadastroCasaController extends Controller
                     $media->video_name = $videoName;
             
                     $media->save();
-                    Log::error('Video não foi salvo: ' . $videoName);
+
+                    Log::info('Vídeo salvo: ' . $videoName);
+
+                } else {
+                    Log::error('Vídeo não foi salvo: ' . $video->getClientOriginalName());
                 }
             }
         }
