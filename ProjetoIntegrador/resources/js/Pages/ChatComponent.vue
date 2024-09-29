@@ -13,7 +13,7 @@
                          class="p-6 text-lg text-gray-600 leading-7 font-semibold border-b border-gray-200 hover:bg-gray-200 hover:bg-opacity-50 hover:cursor-pointer w-full">
                             <p class="flex items-center">
                                 {{user.name}}
-                                <span class="ml-2 w-2 h-2 bg-blue-500 rounded-full"></span>
+                                <span  v-if="user.notification" class="ml-2 w-2 h-2 bg-blue-500 rounded-full"></span>
                             </p>
                         </li>
 
@@ -26,14 +26,14 @@
                 <div class="w-9/12 flex flex-col justify-between overflow-y-scroll" >
 
                     <div 
-                    v-for="message in messages" :key="message.id_menssage"
+                    v-for="message in messages" :key="message.id"
                     :class="(message.fk_id_user_from === $page.props.auth.user.id) ? ' text-right' : 'text-left'"
                     class="w-full p-6 flex flex-col">
                         <div class="w-full mb-3" >
                             <p
                             :class="(message.fk_id_user_from === $page.props.auth.user.id) ? 'messageFromMe': 'messageToMe'"
                              class="inline-block p-2 rounded-md" style="max-width: 75%;">
-                                {{message.content_menssage}}
+                                {{message.content}}
                             </p>
                             <span  class="block mt-1 text-xs text-gray-500">
                                 <p v-if="(message.fk_id_user_from === $page.props.auth.user.id)">
@@ -136,48 +136,48 @@
                     'shipping_time': currentDate.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' }),
                     'date_received' : currentDate.toISOString(),
                     'time_received' : currentDate.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' }),
-                    'content_menssage': this.message
+                    'content': this.message
 
                 })
                 this.message = '';
+                
             })
             this.scrollToBotton()
         },
     
     },
-    mounted() {
+    mounted() { 
         
 
-    // // Configuração do Pusher
-    // const pusher = new Pusher(import.meta.env.VITE_REVERB_APP_KEY, {
-    //     cluster: 'mt1', // Substitua pelo cluster correto se necessário
-    //     wsHost: import.meta.env.VITE_REVERB_HOST,
-    //     wsPort: import.meta.env.VITE_REVERB_PORT,
-    //     forceTLS: false, // Se estiver usando HTTP
-    //     disableStats: true, // Opcional
-    // });
+         axios.get('web/users')
+        .then(response => {
+            this.users = response.data.users; 
+        })
+        .catch(error => {
+            console.error('Erro ao buscar usuários:', error); 
+        });
 
-    // // Inscrição no canal privado
-    // const channel = pusher.subscribe(`user.${this.user.id}`);
+        Echo.private(`user.${this.user.id}`).listen('.SendMessage',async (e) => {
 
-    // channel.bind('SendMessage', (data) => {
-    //     console.log(data.message); // Aqui você pode processar a mensagem recebida
-    // });
+            if(this.userActive && this.userActive.id === e.message.fk_id_user_from){
+                console.log(e);
+                await this.messages.push(e.message);
+                this.scrollToBotton();
+            }
+            else{
+                 const user = this.users.filter((user) =>{
+                     if(user.id === e.message.fk_id_user_from){
+                         return user
+                     }
+                 })
+                 if(user){
+                     user.notification = true;
+                     Vue.set(user[0], 'notifcation', true)
+                 }
+             }
+        });
+}}
 
-    
-        axios.get('web/users')
-            .then(response => {
-                    this.users = response.data.users; 
-            })
-            .catch(error => {
-                console.error('Erro ao buscar usuários:', error); 
-            });
-            // Echo.private(`user.${this.user.id}`)
-            // .listen('.SendMessage', (e) => {
-            // console.log(e.message)
-    },
-    
-};
 
     
 </script>

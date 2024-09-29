@@ -18,7 +18,11 @@
 
 <div class="container mt-5">
     <h3 class="text-center mb-4">Cadastro de Casas</h3>
+<<<<<<< Updated upstream
     <form action="/cadastroCasa" method="POST" class="shadow p-4 rounded bg-light mx-auto" style="max-width: 600px;" enctype="multipart/form-data">
+=======
+    <form action="/cadastroCasa" method="POST" class="shadow p-4 rounded bg-light mx-auto" style="max-width: 600px;">
+>>>>>>> Stashed changes
         @csrf
 
         @if ($errors->any())
