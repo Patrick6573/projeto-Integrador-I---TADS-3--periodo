@@ -76,4 +76,5 @@ Route::group(['middleware'=>['auth:sanctum']], function(){
 
 });
 
+
 require __DIR__.'/auth.php';

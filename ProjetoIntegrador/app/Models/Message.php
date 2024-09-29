@@ -9,12 +9,14 @@ class Message extends Model
 {
     use HasFactory;
 
-
-    protected $table = 'menssages';
+    protected $keyType = 'string';
+    public $incrementing = false;
+    
+    protected $table = 'messages';
     public $timestamps = false;
 
-    protected $fillable = ['shipping_date','shipping_time',
-        'content_menssage','time_received','date_received'
+    protected $fillable = ['id','shipping_date','shipping_time',
+        'content','time_received','date_received'
     ];
 
 }

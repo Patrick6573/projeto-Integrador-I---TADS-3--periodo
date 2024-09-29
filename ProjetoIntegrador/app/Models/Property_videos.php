@@ -18,5 +18,5 @@ class Property_videos extends Model
         'shipping_time',
     ];
 
-    public $timestamps = true;
+    public $timestamps = false;
 }

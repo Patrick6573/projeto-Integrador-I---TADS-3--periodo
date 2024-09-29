@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class CadastroCasa extends Model
 {
     public $timestamps = false;
+
     
     use HasFactory;
     protected $table = 'propertys'; // Nome da tabela, ajuste conforme necessário
@@ -33,4 +34,6 @@ class CadastroCasa extends Model
         'property_title',
         'fk_id_user', // Inclua outros campos aqui conforme necessário
     ];
+
+
 }

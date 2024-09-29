@@ -50,22 +50,26 @@ class chatController extends Controller
         'messages' => $messages
     ], Response::HTTP_OK);
 }
-public function store(Request $request){
+public function store(Request $request)
+{
     $message = new Message();
-    $message->id_menssage = Str::uuid()->toString();
-    $message->fk_id_user_from = Auth::user()->id;
-    $message->fk_id_user_to = $request->to;
-    $message->shipping_date = Carbon::today();
-    $message->shipping_time = now()->format('H:i:s'); 
-    $message->date_received = Carbon::today();
-    $message->time_received = now()->format('H:i:s');
-    $message->content_menssage = $request->input('content');
+    $message->id = Str::uuid()->toString();
+    $message->fk_id_user_from = Auth::user()->id; // Quem enviou
+    $message->fk_id_user_to = $request->to; // Para quem a mensagem está sendo enviada
+    $message->shipping_date = Carbon::today(); // Data de envio
+    $message->shipping_time = now()->format('H:i:s'); // Hora de envio
+    $message->date_received = Carbon::today(); // Data em que a mensagem foi recebida
+    $message->time_received = now()->format('H:i:s'); // Hora em que a mensagem foi recebida
+    $message->content = $request->input('content'); // Conteúdo da mensagem
 
+    // Salva a mensagem no banco de dados
     $message->save();
 
-    Event::dispatch(new SendMessage($message, $request->fk_id_user_to));
+    // Dispara o evento para enviar a mensagem pelo WebSocket
+    Event::dispatch(new SendMessage($message, $request->to));
 
 }
+
 
 
 

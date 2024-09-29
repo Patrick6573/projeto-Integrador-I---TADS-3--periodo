@@ -11,9 +11,11 @@ use App\Models\Property_photos;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Auth;
 
+
 class CadastroCasaController extends Controller
 {
     public function cadastro(Request $request) {
+
 
         // Validação dos dados da casa e da imagem
    
@@ -223,5 +225,6 @@ class CadastroCasaController extends Controller
         $casa->delete();
 
         return redirect('/dashboard')->with('msg','Casa deletada com sucesso');
+
     }
 }
