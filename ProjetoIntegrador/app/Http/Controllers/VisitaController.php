@@ -42,6 +42,12 @@ class VisitaController extends Controller{
             $visita->status = 'Pendente'; // A visita começa com status Pendente
 
             $visita->save();
+                // Notificar o dono da casa
+            $donoDaCasa = $casa->user; // Supondo que a relação está definida no modelo CadastroCasa
+
+            // Notification::send($donoDaCasa, new VisitaSolicitada($visita));
+            //     return redirect()->back()->with('success', 'Solicitação de 
+            //     visita enviada com sucesso!');
         
         } else {
             return redirect()->route('login')->with( 'error', 'Você precisa estar logado para solicitar uma visita.');

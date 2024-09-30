@@ -20,7 +20,7 @@ class SendMessage implements ShouldBroadcast
     /**
      * Create a new event instance.
      */
-    public function __construct(Message $message, int $userNotification)
+    public function __construct(Message $message, string $userNotification)
     {
         $this->message = $message;
         $this->userNotification = $userNotification;

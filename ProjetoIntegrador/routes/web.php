@@ -5,6 +5,7 @@ use App\Http\Controllers\CadastroCasaController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Property_photosController;
 use App\Http\Controllers\UserPhoneController;
+use App\Models\CadastroCasa;
 use App\Models\Property_photos;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -35,7 +36,8 @@ Route::post('/visitas/{id}/cancelar', [VisitaController::class, 'cancelarVisita'
 
 
 Route::get('/dashboard', function () {
-    return view('dashboard');
+    $testes = CadastroCasa::all();
+    return view('dashboard',['testes' => $testes]);
 })->middleware(['auth:sanctum', 'verified'])->name('dashboard');
 
 
@@ -74,6 +76,7 @@ Route::middleware('auth:sanctum')->group(function () {
 Route::post('/cadastroCasa',[CadastroCasaController::class,'cadastro'] );
 //Rota para deletar um cadastro de casa
 Route::delete('/minhasCasas/{id}',[CadastroCasaController::class , 'destroy']);
+//
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
@@ -86,7 +89,7 @@ Route::group(['middleware'=>['auth:sanctum']], function(){
     Route::get('web/messages/{user}', [chatController::class, 'listMessages']);
     Route::post('web/messages/store', [chatController::class, 'store']);
 
-
 });
+
 
 require __DIR__.'/auth.php';
