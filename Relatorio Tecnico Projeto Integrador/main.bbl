@@ -5,17 +5,12 @@
 \providecommand{\abntbstabout}[1]{}
 \abntbstabout{v-1.9.7 }
 
-\bibitem[Araujo 2015]{abntex2-wiki-como-customizar}
-\abntrefinfo{Araujo}{ARAUJO}{2015}
-{ARAUJO, L.~C. \emph{Como customizar o abnTeX2}. 2015. Wiki do abnTeX2.
+\bibitem[DUCHIADE 2024]{preocupacao-exploracao-litio}
+\abntrefinfo{DUCHIADE}{DUCHIADE}{2024}
+{DUCHIADE, A.~C. \emph{Preocupações em Torno da Exploração no Vale do
+  Litio}. 2024. Nexojornal.
 Dispon{\'\i}vel em:
-  \url{https://github.com/abntex/abntex2/wiki/ComoCustomizar}. Acesso em: 27
-  abr 2015.}
-
-\bibitem[Associa{\c c}\~ao Brasileira de Normas T\'ecnicas 2012]{NBR6024:2012}
-\abntrefinfo{ABNT}{ABNT}{2012}
-{ASSOCIA{\c C}\~AO BRASILEIRA DE NORMAS T\'ECNICAS. \emph{{NBR} 6024}:
-  Numera{\c c}\~ao progressiva das se{\c c}\~oes de um documento.
-Rio de Janeiro, 2012. 4~p.}
+  \url{https://www.nexojornal.com.br/externo/2024/07/06/as-preocupacoes-em-torno-da-exploracao-no-vale-do-litio}.
+  Acesso em: 15 Set 2024.}
 
 \end{thebibliography}
