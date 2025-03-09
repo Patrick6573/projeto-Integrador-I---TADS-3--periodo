@@ -1,6 +1,6 @@
 \chapter{ATIVIDADES DESENVOLVIDAS}
 
-Agora falaremos sobre as atividades que foram desenvolvidas ao longo do projeto integrador, discutindo as principais ações que tomamos para o desenvolvimento do sistema de locação de imóveis. As próximas seções demonstrarão aspectos do desenvolvimento do website.
+Neste capítulo falaremos sobre as atividades que foram desenvolvidas ao longo do projeto integrador, discutindo as principais ações que tomamos para o desenvolvimento do sistema de locação de imóveis. As próximas seções demonstrarão aspectos do desenvolvimento do website.
 
 
 
@@ -13,7 +13,7 @@ Agora falaremos sobre as atividades que foram desenvolvidas ao longo do projeto 
 
 
 \section{ESCOPO DO PROJETO}
-Após reuniões com a equipe, definimos que o escopo do projeto será estruturado da seguinte forma:
+Após reuniões iniciais, definimos que o escopo do projeto será estruturado da seguinte forma:
 
 
 %O escopo deste projeto define os limites e as funcionalidades do sistema de locação de imóveis que será desenvolvido. É essencial esclarecer o que está incluído e o que está excluído do projeto para evitar mal-entendidos futuros.
@@ -21,11 +21,11 @@ Após reuniões com a equipe, definimos que o escopo do projeto será estruturad
 \begin{itemize}
     \item \textbf{Inclusões:}
     \begin{itemize}
-        \item Cadastro de imóveis disponíveis para locação.
-        \item Agendamento de visitas para os locatários.
-        \item Busca e filtragem de imóveis com base em critérios como localização, tipo de imóvel e preço.
-        \item Interface para que locadores gerenciem suas propriedades.
-        \item Sistema de chats para comunicação entre locadores e locatários.
+        \item Cadastro de imóveis disponíveis para locação;
+        \item Agendamento de visitas para os locatários;
+        \item Busca e filtragem de imóveis com base em critérios como localização, tipo de imóvel e preço;
+        \item Interface para que locadores gerenciem suas propriedades;
+        \item Sistema de chats para comunicação entre locadores e locatários;
         \item Modelo de contrato de locação, acessível aos usuários, para que possam compreender os principais aspectos legais desse tipo de acordo.
     \end{itemize}
     
@@ -75,6 +75,9 @@ As principais funcionalidades do sistema incluem:
 
 \subsubsection{Requisitos Funcionais (RF)}
 Os requisitos funcionais do sistema incluem:
+
+
+
 \begin{itemize}
     \item RF01: O sistema deve permitir o cadastro de usuários.
     \item RF02: O sistema deve permitir a atualização dos dados do usuário, incluindo nome, e-mail, senha, telefones e foto de perfil.
@@ -355,7 +358,7 @@ Os tipos de dados que cada atributo recebeu foram escolhidos para garantir a qua
 
 \section{ARQUITETURA DO SISTEMA}
 
-A arquitetura geral do sistema foi baseada no padrão MVC (Model - View - Controller), com a utilização de uma camada de Middleware para garantir que somentes usuarios autenticados conseguissem acessar certas funções do sistema.
+A arquitetura geral do sistema foi baseada no padrão MVC (Model - View - Controller), com a utilização de uma camada de middleware para garantir que somente usuários autenticados consigam acessar certas funções do sistema.
 
 \subsection{Front-end}
 
@@ -428,25 +431,27 @@ Para o desenvolvimento dessa aplicação fizemos a utilização dos seguintes \t
 
 \begin{itemize}
     \item Laravel: Framework PHP utilizado para fazer o back-end e boa parte do front-end
+     \item Laravel Brezee: Biblioteca responsavel pelo sistema de login utilizado
+    \item Laravel Reverb: Biblioteca utilizada para realizar a coneção WebSockets do projeto 
     \begin{figure}[h!] 
     \centering
-    \includegraphics[width=0.1\textwidth, height=0.1\textheight]{./img/laravel-logo-41EC1D4C3F-seeklogo.com.png}
+    \includegraphics[width=0.3\textwidth, height=0.3\textheight]{./img/laravel-logo-41EC1D4C3F-seeklogo.com.png}
     \caption{Laravel logo}
     \label{fig:exemplo-imagem}
 \end{figure}
+  
+   
     \newpage
-    \item Laravel Brezee: Biblioteca responsavel pelo sistema de login utilizado
-    \item Laravel Reverb: Biblioteca utilizada para realizar a coneção WebSockets do projeto 
-
     \item Vue: Framework utilizado para fazer a view do chat
-    \begin{figure}[h!] 
-    \centering
-    \includegraphics[width=0.1\textwidth, height=0.1\textheight]{./img/vuejs-logo-17D586B587-seeklogo.com.png}
-    \caption{Laravel logo}
-    \label{fig:exemplo-imagem}
-    \item Vuex: Biblioteca utilizada gerenciamento de estado para aplicações Vue.js
+     \item Vuex: Biblioteca utilizada gerenciamento de estado para aplicações Vue.js
     \item Bootstrap: Biblioteca utilizada para estilização básica das views .blade
     \item Tailwind: Biblioteca utilizada para estilização básica do component do chat
+    \begin{figure}[h!] 
+    \centering
+    \includegraphics[width=0.3\textwidth, height=0.3\textheight]{./img/vuejs-logo-17D586B587-seeklogo.com.png}
+    \caption{Vue logo}
+    \label{fig:exemplo-imagem}
+   
 \end{figure}
 
 
@@ -454,5 +459,4 @@ Para o desenvolvimento dessa aplicação fizemos a utilização dos seguintes \t
 
 
 \end{itemize}
-
 
