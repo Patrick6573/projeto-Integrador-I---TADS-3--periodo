@@ -72,50 +72,78 @@ As principais funcionalidades do sistema incluem:
 \end{itemize}
 
 \subsection{Levantamento de Requisitos}
-
+\begin{table}[h!]
+\centering
+\caption{Requisitos Funcionais do Sistema}
+\begin{tabular}{|c|p{10cm}|}
+\hline
+\textbf{Código do Requisito} & \textbf{Descrição do Requisito} \\
+\hline
+RF01 & O sistema deve permitir o cadastro de usuários. \\
+\hline
+RF02 & O sistema deve permitir a atualização dos dados do usuário, incluindo nome, e-mail, senha, telefones e foto de perfil. \\
+\hline
+RF03 & O sistema deve permitir ao usuário deletar sua conta. \\
+\hline
+RF04 & O usuário receberá um e-mail para verificar o endereço de e-mail informado. \\
+\hline
+RF05 & O usuário deve ser capaz de recuperar a sua senha caso a esqueça. \\
+\hline
+RF06 & O sistema deve permitir o cadastro de imóveis pelos locadores. \\
+\hline
+RF07 & O sistema deve permitir o envio de fotos e vídeos ao realizar o cadastro do imóvel. \\
+\hline
+RF08 & O sistema deve permitir a atualização dos dados dos imóveis, incluindo informações gerais, fotos e vídeos. \\
+\hline
+RF09 & O sistema deve possibilitar a busca de imóveis. \\
+\hline
+RF10 & O sistema deve permitir agendamentos de visitas. \\
+\hline
+RF11 & O sistema deve permitir ao usuário atualizar a data e a hora das visitas. \\
+\hline
+RF12 & O sistema deve permitir ao usuário cancelar visitas. \\
+\hline
+RF13 & O sistema deve ter um sistema de confirmação de visitas, garantindo que ambas as partes estarão disponíveis na hora marcada. \\
+\hline
+RF14 & O sistema deve incluir um sistema de chats para comunicação entre locadores e locatários. \\
+\hline
+RF15 & O sistema deve disponibilizar um modelo de contrato de locação para os usuários. \\
+\hline
+\end{tabular}
+\label{tab:requisitos_funcionais}
+\end{table}
 \subsubsection{Requisitos Funcionais (RF)}
 Os requisitos funcionais do sistema incluem:
+\newpage
 
 
-
-\begin{itemize}
-    \item RF01: O sistema deve permitir o cadastro de usuários.
-    \item RF02: O sistema deve permitir a atualização dos dados do usuário, incluindo nome, e-mail, senha, telefones e foto de perfil.
-    \item RF03: O sistema deve permitir ao usuário deletar sua conta.
-    \item RF04: o usario receberá um e-mail para verificar o endereço de e-mail informado.
-    \item RF05: o usuario deve ser capaz de recuperar a sua senha caso à esqueça
-    \item RF06: O sistema deve permitir o cadastro de imóveis pelos locadores.
-    \item RF07: O sistema deve permitir o envio de fotos e vídeos ao realizar o cadastro do imóvel.
-    \item RF08: O sistema deve permitir a atualização dos dados dos imóveis, incluindo informações gerais, fotos e vídeos.
-    \item RF09: O sistema deve possibilitar a busca de imóveis.
-    \item RF10: O sistema deve permitir agendamentos de visitas.
-    \item RF11: O sistema deve permitir ao usuário atualizar a data e a hora das visitas.
-    \item RF12: O sistema deve permitir ao usuário cancelar visitas.
-    \item RF13: O sistema deve ter um sistema de confirmação de visitas, garantindo que ambas as partes estarão disponíveis na hora marcada.
-    \item RF14: O sistema deve incluir um sistema de chats para comunicação entre locadores e locatários.
-    \item RF15: O sistema deve disponibilizar um modelo de contrato de locação para os usuários.
-\end{itemize}
 
 
 \subsubsection{Requisitos Não-Funcionais (RNF)}
 Os requisitos não-funcionais incluem:
-\begin{itemize}
-    \item RNF01: O sistema deve ser acessível via dispositivos móveis.
-    \item RNF02: O tempo de resposta para busca de imóveis deve ser inferior a 4 segundos.
-    \item RNF03: O sistema deve garantir a segurança dos dados dos usuários.
-    \item RNF04: O sistema deve ser compatível com os principais navegadores (Chrome, Firefox, Safari e Edge).
-    \item RNF05: O sistema deve fornecer um tempo de carregamento de página inferior a 3 segundos.
-    \item RNF06: O sistema deve ser escalável para acomodar o aumento no número de usuários e imóveis.
-    \item RNF07: O sistema deve ser de fácil manutenção e atualização.
-    \item RNF08: O sistema deve apresentar uma interface amigável e intuitiva, facilitando a navegação para todos os usuários.
 
-\end{itemize}
+\begin{table}[h]
+\centering
+\caption{Requisitos Não Funcionais}
+\begin{tabular} {|p{3cm}|p{10cm}|} 
+\hline
+\textbf{Identificador} & \textbf{Requisito} \\ \hline
+RNF01 & O sistema deve ser acessível via dispositivos móveis. \\ \hline
+RNF02 & O tempo de resposta para busca de imóveis deve ser inferior a 4 segundos. \\ \hline
+RNF03 & O sistema deve garantir a segurança dos dados dos usuários. \\ \hline
+RNF04 & O sistema deve ser compatível com os principais navegadores (Chrome, Firefox, Safari e Edge). \\ \hline
+RNF05 & O sistema deve fornecer um tempo de carregamento de página inferior a 3 segundos. \\ \hline
+RNF06 & O sistema deve ser escalável para acomodar o aumento no número de usuários e imóveis. \\ \hline
+RNF07 & O sistema deve ser de fácil manutenção e atualização. \\ \hline
+RNF08 & O sistema deve apresentar uma interface amigável e intuitiva, facilitando a navegação para todos os usuários. \\ \hline
+\end{tabular}
+\end{table}
 
 
-
+\newpage
 \section{BANCO DE DADOS}
 
-A equipe optou pela utilização de um banco de dados relacional e que já tinhamos um certo grau de conhecimento \textbf{MySQL}.
+A equipe optou pela utilização de um banco de dados relacional e que já tinhamos um certo grau de conhecimento o \textbf{MySQL}.
 No sistema criado os dados são salvos, apagados, atualizados e coletados através de Models que realizam a conexão com o banco de dados.
 
 \subsection{Diagrama Entidade-Relacionamento}
@@ -125,6 +153,7 @@ Iremos agora mostrar o diagrama entidade-relacionamento criado durante o projeto
 \begin{figure}[h!] 
     \centering
     \includegraphics[width=\textwidth]{./img/Conceitual.png}
+    
     \caption{Foto do Diagrama Entidade-Relacionamento (DER)}
     \label{fig:exemplo-imagem}
 \end{figure}
@@ -264,7 +293,7 @@ Iremos agora mostrar o diagrama entidade-relacionamento criado durante o projeto
 \newpage
 \begin{figure}[h!] 
     \centering
-    \includegraphics[width=\textwidth]{./img/Logico.png}
+    \includegraphics[width=\textwidth]{./img/Logico.jpeg}
     \caption{Foto do Diagrama Entidade-Relacionamento (DER)}
     \label{fig:exemplo-imagem}
 \end{figure}
@@ -459,4 +488,3 @@ Para o desenvolvimento dessa aplicação fizemos a utilização dos seguintes \t
 
 
 \end{itemize}
-
