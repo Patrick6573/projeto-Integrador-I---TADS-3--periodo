@@ -18,38 +18,34 @@ use Illuminate\Support\Facades\Event;
 class chatController extends Controller
 {
     
-
     public function listMessages(User $user)
-{
-    $userFrom = Auth::user()->id;
-    $userTo = $user->id;
-
-    // Busca as mensagens entre dois usuários
-    $messages = Message::where(function ($query) use ($userFrom, $userTo) {
-        $query->where([
-            'fk_id_user_from' => $userFrom,
-            'fk_id_user_to' => $userTo
-        ]);
-    })->orWhere(function ($query) use ($userFrom, $userTo) {
-        $query->where([
-            'fk_id_user_from' => $userTo,
-            'fk_id_user_to' => $userFrom
-        ]);
-    })->orderBy('shipping_date', 'ASC')
-      ->orderBy('shipping_time', 'ASC')->get();
-
-    // Verifica se há mensagens retornadas
-    if ($messages->isEmpty()) {
+    {
+        $userFrom = Auth::user()->id;
+        $userTo = $user->id;
+    
+        // Busca as mensagens entre os dois usuários
+        $messages = Message::where(function ($query) use ($userFrom, $userTo) {
+            $query->where([
+                'fk_id_user_from' => $userFrom,
+                'fk_id_user_to' => $userTo
+            ]);
+        })->orWhere(function ($query) use ($userFrom, $userTo) {
+            $query->where([
+                'fk_id_user_from' => $userTo,
+                'fk_id_user_to' => $userFrom
+            ]);
+        })->orderBy('shipping_date', 'ASC')
+          ->orderBy('shipping_time', 'ASC')
+          ->get();
+    
+        // Retorna as mensagens em formato JSON
         return response()->json([
-            'message' => 'Nenhuma mensagem encontrada.'
-        ], Response::HTTP_NOT_FOUND);
+            'messages' => $messages
+        ]);
     }
+    
+    
 
-    // Retorna as mensagens em formato JSON
-    return response()->json([
-        'messages' => $messages
-    ], Response::HTTP_OK);
-}
 public function store(Request $request)
 {
     $message = new Message();

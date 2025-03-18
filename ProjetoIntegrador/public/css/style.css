@@ -1,0 +1,439 @@
+@import url('https://fonts.googleapis.com/css2?family=Aclonica&display=swap');
+.criar-conta {
+    background-color: #ffffff;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 100%;
+  }
+  
+  .criar-conta .div {
+    background-color: #ffffff;
+    overflow: hidden;
+    width: 1440px;
+    height: 1024px;
+    position: relative;
+  }
+  
+  .criar-conta .overlap {
+    position: absolute;
+    width: 660px;
+    height: 687px;
+    top: 0px;
+    left: 390px;
+  }
+  
+  .criar-conta .rectangle {
+    position: absolute;
+    width: 660px;
+    height: 686px;
+    top: 1px;
+    left: 0;
+    background-color: #f1f1f1;
+    border-radius: 16px;
+    border: 3px solid;
+    border-color: #ffffff;
+    box-shadow: 0px 4px 4px #00000040;
+  }
+  .criar-conta .rectangle-1 {
+    position: absolute;
+    width: 369px;
+    height: 41px;
+    top: 400px;
+    left: 213px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    border: 1px solid;
+    border-color: #2f80ed;
+  }
+  .criar-conta .text-wrapper {
+    position: absolute;
+    width: 267px;
+    height: 19px;
+    top: 380px;
+    left: 213px;
+    font-family: "Nunito-Regular", Helvetica;
+    font-weight: 400;
+    color: #2f80ed;
+    font-size: 16px;
+    letter-spacing: 0;
+    line-height: normal;
+    white-space: nowrap;
+  }
+  
+  .criar-conta .img {
+    position: absolute;
+    width: 368px;
+    height: 40px;
+    top: 452px;
+    left: 252px;
+  }
+
+  
+  .criar-conta .text-wrapper-2 {
+    position: absolute;
+    width: 267px;
+    height: 19px;
+    top: 450px;
+    left: 213px;
+    font-family: "Nunito-Regular", Helvetica;
+    font-weight: 400;
+    color: #2f80ed;
+    font-size: 16px;
+    letter-spacing: 0;
+    line-height: normal;
+    white-space: nowrap;
+  }
+  
+  .criar-conta .rectangle-2 {
+    position: absolute;
+    width: 369px;
+    height: 41px;
+    top: 470px;
+    left: 213px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    border: 1px solid;
+    border-color: #2f80ed;
+  }
+  
+  .criar-conta .rectangle-3 {
+    position: absolute;
+    width: 224px;
+    height: 687px;
+    top: 0;
+    left: 1px;
+    border-radius: 16px;
+    background: linear-gradient(
+      180deg,
+      rgba(47, 128, 237, 1) 0%,
+      rgba(79, 136, 215, 1) 90%
+    );
+  }
+  
+  .criar-conta .text-wrapper-3 {
+    position: absolute;
+    width: 198px;
+    top: 31px;
+    left: 23px;
+    font-family: "Poppins-Black", Helvetica;
+    font-weight: 900;
+    color: #fffdfd;
+    font-size: 20px;
+    letter-spacing: 0;
+    line-height: normal;
+  }
+  
+  .criar-conta .crie-ou-acesse-sua {
+    position: absolute;
+    width: 190px;
+    top: 182px;
+    left: 27px;
+    font-family: "Poppins-Medium", Helvetica;
+    font-weight: 500;
+    color: #ffffff;
+    font-size: 16px;
+    letter-spacing: 0;
+    line-height: normal;
+  }
+  
+  .criar-conta .text {
+    position: absolute;
+    width: 112px;
+    top: 353px;
+    left: 46px;
+    font-family: "Poppins-Black", Helvetica;
+    font-weight: 900;
+    color: #ffffff;
+    font-size: 24px;
+    letter-spacing: 0;
+    line-height: normal;
+  }
+  
+  .criar-conta .textos-e-destaques {
+    position: absolute;
+    width: 150px;
+    height: 63px;
+    top: 354px;
+    left: 39px;
+  }
+  
+  .criar-conta .vale-lar {
+    position: absolute;
+    width: 147px;
+    top: 0;
+    left: 0;
+    transform: rotate(0.17deg);
+    font-family: "Aclonica", Helvetica;
+    font-weight: 400;
+    color: #ffffff;
+    font-size: 48px;
+    letter-spacing: 0;
+    line-height: normal;
+  }
+  
+  .criar-conta .register {
+    position: absolute;
+    width: 595px;
+    height: 580px;
+    top: 83px;
+    left: 39px;
+  }
+  
+  .criar-conta .overlap-group {
+    position: absolute;
+    width: 136px;
+    height: 46px;
+    top: 534px;
+    left: 0;
+    border-radius: 20px;
+  }
+  
+  .criar-conta .text-wrapper-4 {
+    position: absolute;
+    width: 92px;
+    top: 8px;
+    left: 35px;
+    font-family: "Poppins-Black", Helvetica;
+    font-weight: 900;
+    color: #ffffff;
+    font-size: 20px;
+    letter-spacing: 0;
+    line-height: normal;
+  }
+  
+  .criar-conta .rectangle-4 {
+    position: absolute;
+    width: 136px;
+    height: 46px;
+    top: -8px;
+    left: -30px;
+    border-radius: 20px;
+    border: 3px solid;
+    border-color: #fffafa;
+  }
+  
+  .criar-conta .overlap-2 {
+    position: absolute;
+    width: 373px;
+    height: 59px;
+    top: 0;
+    left: 213px;
+  }
+  
+  .criar-conta .text-wrapper-5 {
+    position: absolute;
+    width: 267px;
+    height: 19px;
+    top: 0;
+    left: 0;
+    font-family: "Nunito-Regular", Helvetica;
+    font-weight: 400;
+    color: #2f80ed;
+    font-size: 16px;
+    letter-spacing: 0;
+    line-height: normal;
+    white-space: nowrap;
+  }
+  
+  .criar-conta .rectangle-5 {
+    position: absolute;
+    width: 373px;
+    height: 41px;
+    top: 18px;
+    left: 0;
+    background-color: #ffffff;
+    border-radius: 10px;
+    border: 1px solid;
+    border-color: #2f80ed;
+  }
+  
+  .criar-conta .overlap-3 {
+    position: absolute;
+    width: 373px;
+    height: 60px;
+    top: 151px;
+    left: 213px;
+  }
+  
+  .criar-conta .rectangle-6 {
+    position: absolute;
+    width: 373px;
+    height: 41px;
+    top: 19px;
+    left: 0;
+    background-color: #ffffff;
+    border-radius: 10px;
+    border: 1px solid;
+    border-color: #2f80ed;
+  }
+  
+  .criar-conta .overlap-4 {
+    position: absolute;
+    width: 374px;
+    height: 59px;
+    top: 227px;
+    left: 212px;
+  }
+  
+  .criar-conta .telefone {
+    left: 1px;
+    position: absolute;
+    width: 267px;
+    height: 19px;
+    top: 0;
+    font-family: "Nunito-Regular", Helvetica;
+    font-weight: 400;
+    color: #2f80ed;
+    font-size: 16px;
+    letter-spacing: 0;
+    line-height: normal;
+    white-space: nowrap;
+  }
+  
+  .criar-conta .rectangle-7 {
+    position: absolute;
+    width: 374px;
+    height: 41px;
+    top: 18px;
+    left: 0;
+    background-color: #ffffff;
+    border-radius: 10px;
+    border: 1px solid;
+    border-color: #2f80ed;
+  }
+  
+  .criar-conta .overlap-group-2 {
+    position: absolute;
+    width: 373px;
+    height: 60px;
+    top: 76px;
+    left: 213px;
+  }
+  
+  .criar-conta .frame {
+    display: flex;
+    width: 145px;
+    height: 45px;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 8px 59px;
+    position: absolute;
+    top: 534px;
+    left: 329px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 4px #00000040;
+    background: #2f80ed;
+  }
+  
+  
+  .criar-conta .text-wrapper-6 {
+    position: relative;
+    width: fit-content;
+    margin-top: -1.28px;
+    margin-left: -41.09px;
+    margin-right: -41.09px;
+    font-family: "Poppins-Black", Helvetica;
+    font-weight: 900;
+    color: #f7f8ff;
+    font-size: 20px;
+    letter-spacing: 0;
+    line-height: normal;
+    background-color: transparent;
+    border: none;
+    cursor: pointer; 
+  }
+  
+  .criar-conta .text-wrapper-7 {
+    position: absolute;
+    width: 293px;
+    top: 22px;
+    left: 700px;
+    font-family: "Aclonica", Helvetica;
+    font-weight: 400;
+    color: #2f80ed;
+    font-size: 36px;
+    letter-spacing: 0;
+    line-height: normal;
+    white-space: nowrap;
+  }
+  
+  .criar-conta .rectangle-8 {
+    position: absolute;
+    width: 243px;
+    height: 25px;
+    top: 315px;
+    left: 330px;
+    background-color: #ffffff;
+    border: 1px solid;
+    border-color: #2f80ed;
+  }
+  
+  .criar-conta .line {
+    position: absolute;
+    width: 1px;
+    height: 23px;
+    top: 383px;
+    left: 543px;
+    object-fit: cover;
+  }
+  
+  .criar-conta .text-wrapper-8 {
+    position: absolute;
+    height: 19px;
+    top: 385px;
+    left: 375px;
+    font-family: "Nunito-Regular", Helvetica;
+    font-weight: 400;
+    color: #a1a1a1;
+    font-size: 14px;
+    letter-spacing: 0;
+    line-height: normal;
+  }
+  
+  .criar-conta .text-wrapper-9 {
+    position: absolute;
+    width: 45px;
+    height: 31px;
+    top: 385px;
+    left: 574px;
+    font-family: "Nunito-Regular", Helvetica;
+    font-weight: 400;
+    color: #000000;
+    font-size: 10px;
+    letter-spacing: 0;
+    line-height: normal;
+  }
+  
+  .criar-conta .text-wrapper-10 {
+    position: absolute;
+    width: 219px;
+    height: 19px;
+    top: 315px;
+    left: 213px;
+    font-family: "Nunito-Regular", Helvetica;
+    font-weight: 400;
+    color: #2f80ed;
+    font-size: 16px;
+    letter-spacing: 0;
+    line-height: normal;
+    white-space: nowrap;
+  }
+  
+  .criar-conta .icon {
+    position: absolute;
+    width: 9px;
+    height: 8px;
+    top: 390px;
+    left: 553px;
+  }
+  
+  .criar-conta .upload {
+    position: absolute;
+    width: 13px;
+    height: 12px;
+    top: 98px;
+    left: 3832px;
+  }
+  

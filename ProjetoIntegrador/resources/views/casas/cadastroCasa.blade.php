@@ -17,7 +17,7 @@
 @endif
 
 <div class="container mt-5">
-    <h3 class="text-center mb-4">Cadastro de Casas</h3>
+    <h3 class="text-center mb-4">Cadastro de Imóveis</h3>
     <form action="/cadastroCasa" method="POST" class="shadow p-4 rounded bg-light mx-auto" style="max-width: 600px;" enctype="multipart/form-data">
         @csrf
 
@@ -34,6 +34,10 @@
         <div class="form-group">
             <label for="street">Logradouro</label>
             <input type="text" class="form-control form-control-sm" id="street" name="street" maxlength="50" placeholder="Ex: Rua das Flores" required>
+        </div>
+        <div class="form-group">
+            <label for="neighborhood">Bairro</label>
+            <input type="text" class="form-control form-control-sm" id="neighborhood" name="neighborhood" maxlength="50" placeholder="Ex: Centro" required>
         </div>
 
         <div class="form-row">
@@ -96,12 +100,17 @@
 
         <div class="form-group">
             <label for="property_type">Tipo de Imóvel</label>
-            <input type="text" class="form-control form-control-sm" id="property_type" name="property_type" maxlength="50" placeholder="Ex: Apartamento" required>
-        </div>
-
-        <div class="form-group">
-            <label for="property_status">Status do Imóvel</label>
-            <input type="text" class="form-control form-control-sm" id="property_status" name="property_status" maxlength="50" placeholder="Ex: Disponível" required>
+            <select class="form-control form-control-sm" id="property_type" name="property_type" required>
+                <option value="" disabled selected>Selecione o tipo de imóvel</option>
+                <option value="Casa">Casa</option>
+                <option value="Apartamento">Apartamento</option>
+                <option value="Kitnet">Kitnet</option>
+                <option value="Sobrado">Sobrado</option>
+                <option value="Cobertura">Cobertura</option>
+                <option value="Chácara">Chácara</option>
+                <option value="Fazenda">Fazenda</option>
+                <option value="Outro">Outro</option>
+            </select>
         </div>
 
         <div class="form-group">
@@ -115,16 +124,12 @@
         </div>
 
         <div class="form-group">
-            <label for="secondary-images">Fotos Secundárias:</label>
-            <input type="file" class="form-control-file" id="secondary-images" name="images[]" multiple accept="image/*">
-        </div>
-
-        <div class="form-group">
-            <label for="videos">Vídeos:</label>
-            <input type="file" class="form-control-file" id="videos" name="videos[]" multiple accept="video/*">
+            <label for="secondary-files">Fotos e Vídeos:</label>
+            <input type="file" class="form-control-file" id="secondary-files" name="files[]" multiple accept="image/*,video/*">
         </div>
 
         <button type="submit" class="btn btn-primary btn-block">Enviar</button>
     </form>
 </div>
+
 @endsection

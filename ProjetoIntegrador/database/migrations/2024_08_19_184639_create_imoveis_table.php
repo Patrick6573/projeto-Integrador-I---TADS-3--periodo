@@ -16,6 +16,7 @@ return new class extends Migration
             $table->uuid('id')->primary();
             $table->string('street', 50);
             $table->integer('number');
+            $table->string('neighborhood', 50);
             $table->string('zip_code', 20);
             $table->string('city', 50);
             $table->string('state', 20);
@@ -29,6 +30,9 @@ return new class extends Migration
             $table->string('property_type', 50);
             $table->string('property_status', 50);
             $table->string('property_title', 50)->nullable();
+            $table->decimal('latitude', 10, 7)->nullable();
+            $table->decimal('longitude', 11, 7)->nullable();
+
             $table->uuid('fk_id_user')->nullable()->index('fk_propertys_4');
 
         });

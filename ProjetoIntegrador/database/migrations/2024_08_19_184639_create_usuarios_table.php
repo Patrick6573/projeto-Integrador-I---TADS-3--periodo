@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('user_type')->default('PADRÂO');
             $table->date('user_registration_date')->default(Carbon::today());
             $table->string('user_photo', 100)->default('user_photo.jpg');
+            $table->string('user_status', 100)->default('ATIVO');
             $table->timestamp('email_verified_at')->nullable();            
             $table->rememberToken();
             $table->timestamps();

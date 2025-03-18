@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\CadastroCasa;
+use App\Models\Property_files;
 use App\Models\Property_videos;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -14,40 +15,68 @@ use Illuminate\Support\Facades\Auth;
 
 class CadastroCasaController extends Controller
 {
-    public function cadastro(Request $request) {
 
-
-        // Validação dos dados da casa e da imagem
-   
-        $request->validate([
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
-            'street' => 'required|string|max:50',
-            
-           
-            'number' => 'required|integer',
-            'zip_code' => 'required|string|max:20',
-            'city' => 'required|string|max:50',
-            'state' => 'required|string|max:20',
-            'number_rooms' => 'required|integer',
-            
-       
-           'number_bathrooms' => 'required|integer',
-            'property_size' => 'required|integer',
-            'rental_value' => 'required|numeric',
-            'property_description' => 'nullable|string|max:500',
-            'property_type' => 'required|string|max:50',
-            
-            'property_status' => 'required|string|max:50',
-  
-            'property_title' => 'required|string|max:50',
-        ],
-        [
-                'image.required' => 'É necessário enviar uma imagem do imóvel.',
-                'image.mimes' => 'A imagem deve ser do tipo jpeg, png, jpg ou gif.',
-                'image.max' => 'A imagem não pode ser maior que 2MB.',
-        ]);
+    public function welcome()
+    {
+        $propertys = CadastroCasa::with('photos')->get();
+    
+        foreach ($propertys as $property) {
+            print_r($property->photos); // Exibe de maneira mais legível o conteúdo da variável
+            // Verificar se existe foto primária
+            $property->primary_photo = $property->photos->firstWhere('type_file', 'FOTO PRIMÁRIA');
+    
+            // Filtra as fotos secundárias (todas que não são FOTO PRIMÁRIA)
+            $property->secundary_photos = $property->photos->where('type_file', '!=', 'FOTO PRIMÁRIA');
+        }
+    
+        return view('dashboard', ['propertys' => $propertys]);
+    }
+    public function dashboard()
+    {
+        $propertys = CadastroCasa::with('photos')->get();
+    
+        foreach ($propertys as $property) {
+            $property->primary_photo = $property->photos->firstWhere('type_file', 'FOTO PRIMÁRIA');
+            if (!$property->primary_photo) {
+                Log::warning("Propriedade sem foto primária: " . $property->id);
+            }
+        }
+        
+        foreach ($propertys as $property) {
+            // Verifica se as fotos foram carregadas corretamente
+            print_r($property->photos); // Exibe de maneira mais legível o conteúdo da variável
+            // Verificar se existe foto primária
+            $property->primary_photo = $property->photos->firstWhere('type_file', 'FOTO PRIMÁRIA');
+    
+            // Filtra as fotos secundárias (todas que não são FOTO PRIMÁRIA)
+            $property->secundary_photos = $property->photos->where('type_file', '!=', 'FOTO PRIMÁRIA');
+        }
+    
+        return view('dashboard', ['propertys' => $propertys]);
+    }
+    
     
 
+    public function showMyProperties()
+    {
+        $userID = Auth::id();
+        $propertys = CadastroCasa::with('photos')->where('fk_id_user', $userID)->get();
+        foreach ($propertys as $property) {
+
+            $property->primary_photo = $property->photos->firstWhere('type_file', 'FOTO PRIMÁRIA');
+            $property->secundary_photo = $property->photos->where('type_file', '!=', 'FOTO PRIMÁRIA');
+        }
+        return view('casas.minhasCasas', ['properties' => $propertys]);
+    }
+    public function showProperty($id)
+    {
+        $property = CadastroCasa::with('photos', 'videos')->findOrFail($id);
+        $property->primary_photo = $property->photos->firstWhere('type_file', 'FOTO PRIMÁRIA');
+        $property->photos = $property->photos->where('type_file', '!=', 'FOTO PRIMÁRIA')->values();
+        return view('casas.casa', compact('property'));
+    }
+    public function cadastro(Request $request)
+    {
         //Salvar dados da casa
         try {
             $cadastroCasa = new CadastroCasa;
@@ -57,6 +86,7 @@ class CadastroCasaController extends Controller
             $cadastroCasa->number = $request->number;
             $cadastroCasa->zip_code = $request->zip_code;
             $cadastroCasa->city = $request->city;
+            $cadastroCasa->neighborhood = $request->neighborhood;
             $cadastroCasa->state = $request->state;
             $cadastroCasa->complement = $request->complement;
             $cadastroCasa->reference_point = $request->reference_point;
@@ -66,9 +96,21 @@ class CadastroCasaController extends Controller
             $cadastroCasa->rental_value = $request->rental_value;
             $cadastroCasa->property_description = $request->property_description;
             $cadastroCasa->property_type = $request->property_type;
-            $cadastroCasa->property_status = $request->property_status;
+            $cadastroCasa->property_status = "DISPONIVEL";
             $cadastroCasa->property_title = $request->property_title;
-            
+
+            // Monta o endereço completo
+            $fullAddress = "{$request->number} {$request->street}, {$request->neighborhood}, {$request->city} - {$request->state}, {$request->zip_code}, Brasil";
+
+            // Obtém latitude e longitude
+            $coordinates = $this->getCoordinates($fullAddress);
+
+            if ($coordinates) {
+                $cadastroCasa->latitude = $coordinates['latitude'];
+                $cadastroCasa->longitude = $coordinates['longitude'];
+            } else {
+                Log::warning('Não foi possível obter coordenadas para: ' . $fullAddress);
+            }
             $cadastroCasa->save();
             $cadastroCasa->refresh();
 
@@ -78,18 +120,17 @@ class CadastroCasaController extends Controller
                 Log::error('Erro: A casa não foi salva corretamente.');
                 return redirect()->back()->with('error', 'Erro ao cadastrar a casa. Tente novamente.');
             }
-            
-    
-            // Salva a foto no banco
+
+            // Salva a mídia (foto ou vídeo) no banco
             if ($request->hasFile('image') && $request->file('image')->isValid()) {
-            
+
                 $requestImage = $request->file('image');
-                
-            
+
+
                 $extension = $requestImage->extension();
-                
+
                 $imageName = md5($requestImage->getClientOriginalName() . strtotime("Now")) . "." . $extension;
-                
+
                 // Mover a imagem para o diretório público            
                 $requestImage->move(public_path('img/casas'), $imageName);
 
@@ -97,28 +138,27 @@ class CadastroCasaController extends Controller
                 if (!file_exists(public_path('img/casas/' . $imageName))) {
                     Log::error('Erro: A imagem não foi movida corretamente: ' . $imageName);
                     return redirect()->back()->with('error', 'Erro ao mover a imagem. Tente novamente.');
-                }
-                else {
+                } else {
                     Log::info('Imagem movida com sucesso: ' . $imageName);
                 }
-        
-                // Cadastrar a imagem no banco de dados, vinculada à casa
-        
-                $photos = new Property_photos;
 
-            
+                // Cadastrar a imagem no banco de dados, vinculada à casa
+
+                $photos = new Property_files;
+
+
                 $photos->id_photo = Str::uuid()->toString();
-            
-            
+
+
                 $photos->fk_id_property = $cadastroCasa->id; // Relaciona à casa pelo ID
 
                 $photos->shipping_date = now();
 
                 $photos->shipping_time = now()->toTimeString();
 
-                $photos->name_photo = $imageName; 
+                $photos->name_file = $imageName;
 
-                $photos->type_photo = "FOTO PRIMÁRIA";
+                $photos->type_file = "FOTO PRIMÁRIA";
 
                 $photos->save();
             }
@@ -127,109 +167,101 @@ class CadastroCasaController extends Controller
 
             Log::info('Redirecionando para a página inicial com mensagem de sucesso.');
 
-            return redirect('/')->with('success', 'Casa cadastrada com sucesso!');   
-
-        }catch (\Exception $e) {
+            return redirect('/')->with('success', 'Casa cadastrada com sucesso!');
+        } catch (\Exception $e) {
 
             Log::error('Erro ao cadastrar casa: ' . $e->getMessage());
             return redirect()->back()->with('error', 'Ocorreu um erro ao cadastrar a casa. Tente novamente.');
-        }     
+        }
     }
+
     //Função para inserir fotos e vídeos
-    public function casaMidia(Request $request, $id){
+    public function casaMidia(Request $request, $id)
+    {
         // Validação para imagens e vídeos
         $request->validate([
-            'images.*' => 'image|mimes:jpeg,png,jpg,gif|max:2048', // Limite de 2MB por imagem
-            'videos.*' => 'mimetypes:video/avi,video/mpeg,video/mp4|max:50000', // Limite de 50MB por vídeo
+            'files.*' => 'file|max:50000', // Limite de 50MB por arquivo (ajuste conforme necessário)
+            'files.*.image' => 'image|mimes:jpeg,png,jpg,gif,bmp,tiff,webp,svg|max:2048', // Limite de 2MB para imagens
+            'files.*.video' => 'mimetypes:video/avi,video/mpeg,video/mp4,video/mov,video/wmv,video/flv,video/mkv,video/webm,video/3gp|max:50000', // Limite de 50MB para vídeos
         ]);
-        
-        // Upload das fotos secundárias
-      
-        if ($request->hasFile('images')) {
-                
-            foreach ($request->file('images') as $image) {
-                    
-                if ($image->isValid()) {
-                        
-                    // Processar cada imagem 
-                                                
-                    $extension = $image->extension();
-                    
-                    $imageName = md5($image->getClientOriginalName() . time()) . '.' . $extension;
-                    
-                    // Mover a imagem para o diretório público     
-                            
-                    $image->move(public_path('img/casas'), $imageName);
-                            
-                    // Salvar os dados da imagem no banco de dados                    
-                            
-                    $photo = new Property_photos;
-            
-                    $photo->id_photo = Str::uuid()->toString();
-                
-                    $photo->fk_id_property = $id; // O ID da casa
-            
-                    $photo->shipping_date = now();
 
-                    $photo->shipping_time = now()->toTimeString();
-                
-                    $photo->name_photo = $imageName;
+        // Upload dos arquivos (imagens ou vídeos)
+        if ($request->hasFile('files')) {
+            foreach ($request->file('files') as $file) {
+                if ($file->isValid()) {
+                    // Obtém a extensão original do arquivo
+                    $extension = $file->getClientOriginalExtension();
 
-                    $photo->save();
-                    
-                }
-            }
-        }
-        // Upload dos vídeos
-        if ($request->hasFile('videos')) {
-        
-      
-            foreach ($request->file('videos') as $video) {
-                        
-                    
-                if ($video->isValid()) {
-                            
-                    // Processar cada vídeo
-                                        
-                    $extension = $video->extension();
-                                    
-                    $videoName = md5($video->getClientOriginalName() . time()) . '.' . $extension;
-                            
-                    // Mover o vídeo para o diretório público
-                
-                    $video->move(public_path('videos/casas'), $videoName);
-                    
-                    // Salvar os dados do vídeo no banco de dados
-                    
-                    $media = new Property_videos();
+                    // Obtém o tipo MIME do arquivo
+                    $mimeType = $file->getMimeType();
 
-                    $media->id_video = Str::uuid()->toString();
+                    // Verifica se é uma imagem ou um vídeo com base na extensão e no MIME type
+                    if (
+                        in_array($extension, ['jpeg', 'png', 'jpg', 'gif', 'bmp', 'tiff', 'webp', 'svg']) ||
+                        in_array($mimeType, ['image/jpeg', 'image/png', 'image/gif', 'image/bmp', 'image/tiff', 'image/webp', 'image/svg+xml'])
+                    ) {
+                        $type = 'photo';
+                        $directory = 'img/casas';
+                    } elseif (
+                        in_array($extension, ['avi', 'mpeg', 'mpg', 'mp4', 'mov', 'wmv', 'flv', 'mkv', 'webm', '3gp']) ||
+                        in_array($mimeType, ['video/avi', 'video/mpeg', 'video/mpg', 'video/mp4', 'video/quicktime', 'video/x-ms-wmv', 'video/x-flv', 'video/x-matroska', 'video/webm', 'video/3gpp'])
+                    ) {
+                        $type = 'video';
+                        $directory = 'img/casas';
+                    } else {
+                        Log::warning("Arquivo ignorado (extensão ou MIME type não suportado): " . $file->getClientOriginalName());
+                        continue;
+                    }
 
-                    $media->fk_id_property = $id; // O ID da casa
-                    
-                    $media->shipping_date = now();
+                    // Normaliza o nome do arquivo
+                    $normalizedFileName = preg_replace('/[^A-Za-z0-9\.-]/', '_', $file->getClientOriginalName());
+                    $fileName = md5($normalizedFileName . time()) . '.' . $extension;
 
-                    $media->shipping_time = now()->toTimeString();
-                    
-                    $media->video_name = $videoName;
-            
-                    $media->save();
+                    // Cria o diretório caso não exista
+                    $path = public_path($directory);
+                    if (!file_exists($path)) {
+                        mkdir($path, 0777, true);
+                    }
 
-                    Log::info('Vídeo salvo: ' . $videoName);
+                    // Mover o arquivo para o diretório público
+                    $file->move($path, $fileName);
 
+                    // Salvar no banco de dados
+                    $fileRecord = new Property_files;
+                    $fileRecord->id_photo = Str::uuid()->toString();
+                    $fileRecord->fk_id_property = $id;
+                    $fileRecord->shipping_date = now();
+                    $fileRecord->shipping_time = now()->toTimeString();
+                    $fileRecord->name_file = $fileName;
+                    $fileRecord->type_file = $type;
+                    $fileRecord->save();
+
+                    Log::info('Arquivo salvo: ' . $fileName);
                 } else {
-                    Log::error('Vídeo não foi salvo: ' . $video->getClientOriginalName());
+                    Log::error('Erro ao salvar arquivo: ' . $file->getClientOriginalName());
                 }
             }
         }
+
         return redirect()->back()->with('success', 'Fotos e vídeos carregados com sucesso.');
     }
 
-    public function destroy($id){
+
+    public function edit($id)
+    {
+        $property = CadastroCasa::with('files')->findOrFail($id);
+        $property->primary_photo = $property->files->firstWhere('type_file', 'FOTO PRIMÁRIA')?->name_file;
+        $property->photos = $property->files->where('type_file', '!=', 'FOTO PRIMÁRIA')->values();
+        return view('casas.editCasa', [
+            'property' => $property
+        ]);
+    }
+
+    public function destroy($id)
+    {
         $casa = CadastroCasa::findOrFail($id);
         $casa->delete();
 
-        return redirect('/dashboard')->with('msg','Casa deletada com sucesso');
-
+        return redirect('/dashboard')->with('msg', 'Casa deletada com sucesso');
     }
 }

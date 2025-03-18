@@ -85,21 +85,36 @@ class ProfileController extends Controller
     /**
      * Delete the user's account.
      */
-    public function destroy(Request $request): RedirectResponse
-    {
-        $request->validateWithBag('userDeletion', [
-            'password' => ['required', 'current_password'],
-        ]);
 
-        $user = $request->user();
+public function destroy(Request $request): RedirectResponse
+{
+    $request->validateWithBag('userDeletion', [
+        'password' => ['required', 'current_password'],
+    ]);
 
-        Auth::logout();
+    $user = $request->user();
 
-        $user->delete();
+    // Certifique-se de usar o guard correto
+    Auth::guard('web')->logout();
 
+    // Atualiza o status do usuário para 'INATIVO'
+    $updated = $user->update(['user_status' => 'INATIVO']);
+
+    // Se a atualização do status foi bem-sucedida, faça logout e invalidar a sessão
+    if ($updated) {
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
-        return Redirect::to('/');
+        // Adicione uma mensagem flash para o usuário
+        session()->flash('status', 'Sua conta foi desativada com sucesso.');
+
+        // Redireciona para a página inicial ou outra página
+        return Redirect::to('/')->with('status', 'Conta desativada');
     }
+
+    // Caso contrário, redireciona com uma mensagem de erro
+    return Redirect::back()->withErrors(['status' => 'Houve um erro ao desativar sua conta.']);
+}
+
+
 }

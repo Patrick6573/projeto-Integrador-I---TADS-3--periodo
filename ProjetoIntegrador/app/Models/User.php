@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 //use app\Models\User_Phone;
-class User extends Authenticatable implements MustVerifyEmail
+class User extends Authenticatable // implements MustVerifyEmail
 {
     use HasFactory, Notifiable;
 
@@ -29,6 +29,7 @@ class User extends Authenticatable implements MustVerifyEmail
         'user_type',
         'user_registration_date',
         'user_photo',
+        'user_status'
     ];
 
     /**
@@ -63,4 +64,16 @@ class User extends Authenticatable implements MustVerifyEmail
     public function user(){
         return $this->belongsTo('App\Models\User');
     }
+
+    public function messagesSent()
+    {
+        return $this->hasMany(Message::class, 'fk_id_user_from');
+    }
+
+    public function messagesReceived()
+    {
+        return $this->hasMany(Message::class, 'fk_id_user_to');
+    }
 }
+
+

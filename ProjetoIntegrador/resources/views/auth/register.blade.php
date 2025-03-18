@@ -1,73 +1,88 @@
-<x-guest-layout>
-    <form method="POST" action="{{ route('register') }}" enctype="multipart/form-data">
-        @csrf
+<!DOCTYPE html>
+<html lang="pt-br">
 
-        
-        <div>
-            <x-input-label for="name" :value="__('Name')" />
-            <x-text-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus autocomplete="name" />
-            <x-input-error :messages="$errors->get('name')" class="mt-2" />
+<head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="{{ asset('css/global.css') }}" />
+    <link rel="stylesheet" href="{{ asset('css/style.css') }}" />
+    <title>Vale Lar - Criar Conta</title>
+</head>
+
+<body>
+    <div class="criar-conta">
+        <div class="div">
+            <div class="overlap">
+                <div class="rectangle"></div>
+                <div class="rectangle-3"></div>
+
+                <div class="text-wrapper-3">Seja bem-vindo!</div>
+                <p class="crie-ou-acesse-sua">Crie ou acesse sua<br />conta agora mesmo</p>
+
+                <div class="textos-e-destaques">
+                    <div class="vale-lar">Vale <br />&nbsp;&nbsp; Lar</div>
+                </div>
+
+                <!-- Formulário de Cadastro -->
+                <form method="POST" action="{{ route('register') }}" enctype="multipart/form-data">
+                    @csrf
+                    <div class="register">
+                        <!-- Botão Entrar -->
+                        <div class="overlap-group">
+                            <a href="{{ route('login') }}" class="text-wrapper-4">
+                                <div class="rectangle-4"></div>
+                                Entrar
+                            </a>
+                        </div>
+                        <!-- Campos de Entrada -->
+                        <div class="overlap-2">
+                            <label class="text-wrapper-5" for="nome-completo">Nome Completo*</label><br>
+                            <input type="text" id="name" name="name" class="rectangle-5" required />
+                        </div>
+
+                        <div class="overlap-3">
+                            <label class="text-wrapper-5" for="telefone1">Telefone 1*</label>
+                            <input type="tel" id="user_phone1" name="user_phone1" class="rectangle-6" required />
+                        </div>
+
+                        <div class="overlap-4">
+                            <label class="telefone" for="telefone2">Telefone 2 (Opcional)</label>
+                            <input type="tel" id="user_phone2" name="user_phone2" class="rectangle-7" />
+                        </div>
+
+                        <div class="overlap-group-2">
+                            <label class="text-wrapper-5" for="email">E-mail*</label>
+                            <input type="email" id="email" name="email" class="rectangle-6" required />
+                        </div>
+
+                        <!-- Senha -->
+                        <div class="overlap-group-3">
+                            <label class="text-wrapper" for="senha">Senha*</label>
+                            <input type="password" id="password" name="password" class="rectangle-1" required />
+                        </div>
+                        <div class="overlap-group-4">
+                            <label class="text-wrapper-2" for="confirmar-senha">Confirme sua senha*</label>
+                            <input type="password" id="password_confirmation" name="password_confirmation" class="rectangle-2" required />
+                        </div>
+
+                        <!-- Foto de Perfil -->
+                        <div>
+                            <label class="text-wrapper-10" for="foto-perfil">Foto de Perfil:</label>
+                            <input type="file" id="user_photo" name="user_photo" accept="image/*" class="rectangle-8" />
+                        </div>
+
+                        <!-- Botão de Cadastro -->
+                        <div class="frame">
+                            <button type="submit" class="text-wrapper-6">Cadastrar</button>
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+
+            <div class="text-wrapper-7">Crie sua conta</div>
+            <img class="line" src="img/line-10.svg" />
         </div>
+    </div>
+</body>
 
-        
-        <div class="mt-4">
-            <x-input-label for="email" :value="__('Email')" />
-            <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autocomplete="username" />
-            <x-input-error :messages="$errors->get('email')" class="mt-2" />
-        </div>
-        <div class="mt-4">
-            <x-input-label for="user_phone1" :value="__('Telefone 1')" />
-            <x-text-input id="user_phone1" class="block mt-1 w-full" 
-                            type="text" name="user_phone1" 
-                            :value="old('user_phone1')" required />
-            
-        </div>
-        <div class="mt-4">
-            <x-input-label for="user_phone2" :value="__('Telefone 2')" />
-            <x-text-input id="user_phone2" class="block mt-1 w-full" 
-                            type="text" name="user_phone2" 
-                            :value="old('user_phone2')"   />
-            
-        </div>
-        <div class="mt-4">
-            <x-input-label for="user_photo" :value="__('Foto de Perfil')" />
-            <x-text-input id="user_photo" class="block mt-1 w-full" 
-                            type="file" name="user_photo" 
-                            accept="image/*" :value="old('user_photo')"   />
-            
-        </div>
-
-        
-        <div class="mt-4">
-            <x-input-label for="password" :value="__('Password')" />
-
-            <x-text-input id="password" class="block mt-1 w-full"
-                            type="password"
-                            name="password"
-                            required autocomplete="new-password" />
-
-            <x-input-error :messages="$errors->get('password')" class="mt-2" />
-        </div>
-
-        
-        <div class="mt-4">
-            <x-input-label for="password_confirmation" :value="__('Confirm Password')" />
-
-            <x-text-input id="password_confirmation" class="block mt-1 w-full"
-                            type="password"
-                            name="password_confirmation" required autocomplete="new-password" />
-
-            <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
-        </div>
-
-        <div class="flex items-center justify-end mt-4">
-            <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('login') }}">
-                {{ __('Already registered?') }}
-            </a>
-
-            <x-primary-button class="ms-4">
-                {{ __('Register') }}
-            </x-primary-button>
-        </div>
-    </form>
-</x-guest-layout>
+</html>

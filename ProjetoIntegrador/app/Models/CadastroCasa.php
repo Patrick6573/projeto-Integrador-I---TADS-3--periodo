@@ -11,15 +11,16 @@ class CadastroCasa extends Model
 
     
     use HasFactory;
-    protected $table = 'propertys'; // Nome da tabela, ajuste conforme necessário
-    public $incrementing = false; // Desativa o autoincremento
-    protected $keyType = 'string'; // Define o tipo da chave como string para UUID
+    protected $table = 'propertys'; 
+    public $incrementing = false; 
+    protected $keyType = 'string'; 
 
     protected $fillable = [
         'id', 
         'street',
-        'number',
+    'number',
         'zip_code',
+        "neighborhood",
         'city',
         'state',
         'complement',
@@ -32,8 +33,28 @@ class CadastroCasa extends Model
         'property_type',
         'property_status',
         'property_title',
-        'fk_id_user', // Inclua outros campos aqui conforme necessário
+        'fk_id_user', 
+        'latitude',
+        'longitude'
     ];
+    
+// Modelo CadastroCasa
+
+
+
+public function files()
+{
+    return $this->hasMany(Property_files::class, 'fk_id_property', 'id');
+}
+
+
+
+
+public function owner()
+    {
+        return $this->belongsTo(User::class, 'fk_id_user');
+    }
+
 
 
 }

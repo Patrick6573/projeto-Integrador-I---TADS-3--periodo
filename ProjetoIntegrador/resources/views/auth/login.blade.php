@@ -1,47 +1,54 @@
-<x-guest-layout>
-    <!-- Session Status -->
-    <x-auth-session-status class="mb-4" :status="session('status')" />
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="{{ asset('css/global.css') }}" />
+    <link rel="stylesheet" href="{{ asset('css/style2.css') }}" />
+    <title>Vale Lar - Login</title>
+  </head>
+  <body>
+    <div class="login">
+      <div class="overlap-wrapper">
+        <div class="overlap">
+          <div class="rectangle"></div>
+          <div class="text-wrapper">
+             <a href="{{ route('register') }}" class="link-cadastro">Não tem conta?</a>
+          </div>
 
-    <form method="POST" action="{{ route('login') }}">
-        @csrf
 
-        <!-- Email Address -->
-        <div>
-            <x-input-label for="email" :value="__('Email')" />
-            <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus autocomplete="username" />
-            <x-input-error :messages="$errors->get('email')" class="mt-2" />
+          <img class="line" src="img/line-1.png" />
+          <form method="POST" action="{{ route('login') }}" enctype="multipart/form-data">
+            @csrf <!-- CSRF Token for Laravel -->
+            <div class="box"><div class="rectangle"></div></div>
+
+            <!-- Botão de Entrar -->
+            <div class="group">
+              <div class="overlap-group">
+                <button type="submit" class="div">Entrar</button>
+              </div>
+            </div>
+
+            <!-- Texto de Abaixo -->
+            <div class="overlap-group-wrapper">
+              <div class="div-wrapper">
+                <div class="text-wrapper-2">Vale Lar</div>
+              </div>
+            </div>
+
+            <!-- Campo de E-mail -->
+            <div class="form-group">
+              <label for="email" class="text-wrapper-3">E-mail</label>
+              <input type="email" id="email" name="email" class="rectangle-2" required />
+            </div>
+
+            <!-- Campo de Senha -->
+            <div class="form-group">
+              <label for="password" class="text-wrapper-4">Senha</label>
+              <input type="password" id="password" name="password" class="rectangle-3" required />
+            </div>
+          </form>
         </div>
-
-        <!-- Password -->
-        <div class="mt-4">
-            <x-input-label for="password" :value="__('Password')" />
-
-            <x-text-input id="password" class="block mt-1 w-full"
-                            type="password"
-                            name="password"
-                            required autocomplete="current-password" />
-
-            <x-input-error :messages="$errors->get('password')" class="mt-2" />
-        </div>
-
-        <!-- Remember Me -->
-        <div class="block mt-4">
-            <label for="remember_me" class="inline-flex items-center">
-                <input id="remember_me" type="checkbox" class="rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" name="remember">
-                <span class="ms-2 text-sm text-gray-600">{{ __('Remember me') }}</span>
-            </label>
-        </div>
-
-        <div class="flex items-center justify-end mt-4">
-            @if (Route::has('password.request'))
-                <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('password.request') }}">
-                    {{ __('Forgot your password?') }}
-                </a>
-            @endif
-
-            <x-primary-button class="ms-3">
-                {{ __('Log in') }}
-            </x-primary-button>
-        </div>
-    </form>
-</x-guest-layout>
+      </div>
+    </div>
+  </body>
+</html>

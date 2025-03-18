@@ -10,6 +10,8 @@ class Visita extends Model{
 
     // Nome da tabela no banco de dados
     protected $table = 'visits';
+    protected $primaryKey = 'id_visit';
+    protected $keyType = 'string'; // Tipo da chave (UUID é string)
 
     // Permitir atribuição em massa para os campos especificados
     protected $fillable = [
@@ -28,6 +30,7 @@ public function usuario()
 {
     return $this->belongsTo(User::class, 'user_id');
 }
+public $timestamps = false;
 
 // Relação com a casa
 public function casa()
