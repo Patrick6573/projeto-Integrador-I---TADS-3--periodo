@@ -1,6 +1,6 @@
 \chapter{ATIVIDADES DESENVOLVIDAS}
 
-Agora falaremos sobre as atividades que foram desenvolvidas ao longo do projeto integrador, discutindo as principais ações que tomamos para o desenvolvimento do sistema de locação de imóveis. As próximas seções demonstrarão aspectos do desenvolvimento do website.
+Neste capítulo falaremos sobre as atividades que foram desenvolvidas ao longo do projeto integrador, discutindo as principais ações que tomamos para o desenvolvimento do sistema de locação de imóveis. As próximas seções demonstrarão aspectos do desenvolvimento do website.
 
 
 
@@ -13,7 +13,7 @@ Agora falaremos sobre as atividades que foram desenvolvidas ao longo do projeto 
 
 
 \section{ESCOPO DO PROJETO}
-Após reuniões com a equipe, definimos que o escopo do projeto será estruturado da seguinte forma:
+Após reuniões iniciais, definimos que o escopo do projeto será estruturado da seguinte forma:
 
 
 %O escopo deste projeto define os limites e as funcionalidades do sistema de locação de imóveis que será desenvolvido. É essencial esclarecer o que está incluído e o que está excluído do projeto para evitar mal-entendidos futuros.
@@ -21,11 +21,11 @@ Após reuniões com a equipe, definimos que o escopo do projeto será estruturad
 \begin{itemize}
     \item \textbf{Inclusões:}
     \begin{itemize}
-        \item Cadastro de imóveis disponíveis para locação.
-        \item Agendamento de visitas para os locatários.
-        \item Busca e filtragem de imóveis com base em critérios como localização, tipo de imóvel e preço.
-        \item Interface para que locadores gerenciem suas propriedades.
-        \item Sistema de chats para comunicação entre locadores e locatários.
+        \item Cadastro de imóveis disponíveis para locação;
+        \item Agendamento de visitas para os locatários;
+        \item Busca e filtragem de imóveis com base em critérios como localização, tipo de imóvel e preço;
+        \item Interface para que locadores gerenciem suas propriedades;
+        \item Sistema de chats para comunicação entre locadores e locatários;
         \item Modelo de contrato de locação, acessível aos usuários, para que possam compreender os principais aspectos legais desse tipo de acordo.
     \end{itemize}
     
@@ -72,56 +72,88 @@ As principais funcionalidades do sistema incluem:
 \end{itemize}
 
 \subsection{Levantamento de Requisitos}
-
+\begin{table}[h!]
+\centering
+\caption{Requisitos Funcionais do Sistema}
+\begin{tabular}{|c|p{10cm}|}
+\hline
+\textbf{Código do Requisito} & \textbf{Descrição do Requisito} \\
+\hline
+RF01 & O sistema deve permitir o cadastro de usuários. \\
+\hline
+RF02 & O sistema deve permitir a atualização dos dados do usuário, incluindo nome, e-mail, senha, telefones e foto de perfil. \\
+\hline
+RF03 & O sistema deve permitir ao usuário deletar sua conta. \\
+\hline
+RF04 & O usuário receberá um e-mail para verificar o endereço de e-mail informado. \\
+\hline
+RF05 & O usuário deve ser capaz de recuperar a sua senha caso a esqueça. \\
+\hline
+RF06 & O sistema deve permitir o cadastro de imóveis pelos locadores. \\
+\hline
+RF07 & O sistema deve permitir o envio de fotos e vídeos ao realizar o cadastro do imóvel. \\
+\hline
+RF08 & O sistema deve permitir a atualização dos dados dos imóveis, incluindo informações gerais, fotos e vídeos. \\
+\hline
+RF09 & O sistema deve possibilitar a busca de imóveis. \\
+\hline
+RF10 & O sistema deve permitir agendamentos de visitas. \\
+\hline
+RF11 & O sistema deve permitir ao usuário atualizar a data e a hora das visitas. \\
+\hline
+RF12 & O sistema deve permitir ao usuário cancelar visitas. \\
+\hline
+RF13 & O sistema deve ter um sistema de confirmação de visitas, garantindo que ambas as partes estarão disponíveis na hora marcada. \\
+\hline
+RF14 & O sistema deve incluir um sistema de chats para comunicação entre locadores e locatários. \\
+\hline
+RF15 & O sistema deve disponibilizar um modelo de contrato de locação para os usuários. \\
+\hline
+\end{tabular}
+\label{tab:requisitos_funcionais}
+\end{table}
 \subsubsection{Requisitos Funcionais (RF)}
 Os requisitos funcionais do sistema incluem:
-\begin{itemize}
-    \item RF01: O sistema deve permitir o cadastro de usuários.
-    \item RF02: O sistema deve permitir a atualização dos dados do usuário, incluindo nome, e-mail, senha, telefones e foto de perfil.
-    \item RF03: O sistema deve permitir ao usuário deletar sua conta.
-    \item RF04: o usario receberá um e-mail para verificar o endereço de e-mail informado.
-    \item RF05: o usuario deve ser capaz de recuperar a sua senha caso à esqueça
-    \item RF06: O sistema deve permitir o cadastro de imóveis pelos locadores.
-    \item RF07: O sistema deve permitir o envio de fotos e vídeos ao realizar o cadastro do imóvel.
-    \item RF08: O sistema deve permitir a atualização dos dados dos imóveis, incluindo informações gerais, fotos e vídeos.
-    \item RF09: O sistema deve possibilitar a busca de imóveis.
-    \item RF10: O sistema deve permitir agendamentos de visitas.
-    \item RF11: O sistema deve permitir ao usuário atualizar a data e a hora das visitas.
-    \item RF12: O sistema deve permitir ao usuário cancelar visitas.
-    \item RF13: O sistema deve ter um sistema de confirmação de visitas, garantindo que ambas as partes estarão disponíveis na hora marcada.
-    \item RF14: O sistema deve incluir um sistema de chats para comunicação entre locadores e locatários.
-    \item RF15: O sistema deve disponibilizar um modelo de contrato de locação para os usuários.
-\end{itemize}
+\newpage
+
+
 
 
 \subsubsection{Requisitos Não-Funcionais (RNF)}
 Os requisitos não-funcionais incluem:
-\begin{itemize}
-    \item RNF01: O sistema deve ser acessível via dispositivos móveis.
-    \item RNF02: O tempo de resposta para busca de imóveis deve ser inferior a 4 segundos.
-    \item RNF03: O sistema deve garantir a segurança dos dados dos usuários.
-    \item RNF04: O sistema deve ser compatível com os principais navegadores (Chrome, Firefox, Safari e Edge).
-    \item RNF05: O sistema deve fornecer um tempo de carregamento de página inferior a 3 segundos.
-    \item RNF06: O sistema deve ser escalável para acomodar o aumento no número de usuários e imóveis.
-    \item RNF07: O sistema deve ser de fácil manutenção e atualização.
-    \item RNF08: O sistema deve apresentar uma interface amigável e intuitiva, facilitando a navegação para todos os usuários.
 
-\end{itemize}
+\begin{table}[h]
+\centering
+\caption{Requisitos Não Funcionais}
+\begin{tabular} {|p{3cm}|p{10cm}|} 
+\hline
+\textbf{Identificador} & \textbf{Requisito} \\ \hline
+RNF01 & O sistema deve ser acessível via dispositivos móveis. \\ \hline
+RNF02 & O tempo de resposta para busca de imóveis deve ser inferior a 4 segundos. \\ \hline
+RNF03 & O sistema deve garantir a segurança dos dados dos usuários. \\ \hline
+RNF04 & O sistema deve ser compatível com os principais navegadores (Chrome, Firefox, Safari e Edge). \\ \hline
+RNF05 & O sistema deve fornecer um tempo de carregamento de página inferior a 3 segundos. \\ \hline
+RNF06 & O sistema deve ser escalável para acomodar o aumento no número de usuários e imóveis. \\ \hline
+RNF07 & O sistema deve ser de fácil manutenção e atualização. \\ \hline
+RNF08 & O sistema deve apresentar uma interface amigável e intuitiva, facilitando a navegação para todos os usuários. \\ \hline
+\end{tabular}
+\end{table}
 
 
-
+\newpage
 \section{BANCO DE DADOS}
 
-A equipe optou pela utilização de um banco de dados relacional e que já tinhamos um certo grau de conhecimento \textbf{MySQL}.
+A equipe optou pela utilização de um banco de dados relacional e que já tinhamos um certo grau de conhecimento o \textbf{MySQL}.
 No sistema criado os dados são salvos, apagados, atualizados e coletados através de Models que realizam a conexão com o banco de dados.
 
 \subsection{Diagrama Entidade-Relacionamento}
 
-Iremos agora mostrar o diagrama entidade-relacionamento criado durante o projeto.
-
+Na figura 1 esta apresentado o diagrama entidade-relacionamento criado durante o projeto.
+\newpage
 \begin{figure}[h!] 
     \centering
     \includegraphics[width=\textwidth]{./img/Conceitual.png}
+    
     \caption{Foto do Diagrama Entidade-Relacionamento (DER)}
     \label{fig:exemplo-imagem}
 \end{figure}
@@ -257,14 +289,17 @@ Agora vamos falar sobre os relacionamentos que cada entidade possui.
 
 \subsection{Modelo Entidade-Relacionamento}
 
-Iremos agora mostrar o diagrama entidade-relacionamento criado durante o projeto.
+Iremos agora mostrar a modelagem entidade-relacionamento criada durante o projeto.
+
 \newpage
 \begin{figure}[h!] 
     \centering
-    \includegraphics[width=\textwidth]{./img/Logico.png}
+      \includegraphics[width=\textwidth]{./img/Logico.jpeg}
     \caption{Foto do Diagrama Entidade-Relacionamento (DER)}
     \label{fig:exemplo-imagem}
 \end{figure}
+
+
 \subsubsection{Tipos de dados}
 
 Os tipos de dados que cada atributo recebeu foram escolhidos para garantir a quantidade adequada de armazenamento e integridade dos dados. Mas existem dois que são especias para aquela função.
@@ -355,11 +390,11 @@ Os tipos de dados que cada atributo recebeu foram escolhidos para garantir a qua
 
 \section{ARQUITETURA DO SISTEMA}
 
-A arquitetura geral do sistema foi baseada no padrão MVC (Model - View - Controller), com a utilização de uma camada de Middleware para garantir que somentes usuarios autenticados conseguissem acessar certas funções do sistema.
+A arquitetura geral do sistema foi baseada no padrão MVC (Model - View - Controller), com a utilização de uma camada de middleware para garantir que somente usuários autenticados consigam acessar certas funções do sistema.
 
 \subsection{Front-end}
 
-Os arquivos do front-end estão alocados dentro da pasta resources.
+Os arquivos do front-end estão alocados dentro da pasta \( \mathit{resources} \) .
 
 \begin{verbatim}
 /resources
@@ -428,31 +463,28 @@ Para o desenvolvimento dessa aplicação fizemos a utilização dos seguintes \t
 
 \begin{itemize}
     \item Laravel: Framework PHP utilizado para fazer o back-end e boa parte do front-end
+     \item Laravel Brezee: Biblioteca responsavel pelo sistema de login utilizado
+    \item Laravel Reverb: Biblioteca utilizada para realizar a coneção WebSockets do projeto 
     \begin{figure}[h!] 
     \centering
-    \includegraphics[width=0.1\textwidth, height=0.1\textheight]{./img/laravel-logo-41EC1D4C3F-seeklogo.com.png}
+    \includegraphics[width=0.3\textwidth, height=0.3\textheight]{./img/laravel-logo-41EC1D4C3F-seeklogo.com.png}
     \caption{Laravel logo}
     \label{fig:exemplo-imagem}
 \end{figure}
+  
+   
     \newpage
-    \item Laravel Brezee: Biblioteca responsavel pelo sistema de login utilizado
-    \item Laravel Reverb: Biblioteca utilizada para realizar a coneção WebSockets do projeto 
-
     \item Vue: Framework utilizado para fazer a view do chat
-    \begin{figure}[h!] 
-    \centering
-    \includegraphics[width=0.1\textwidth, height=0.1\textheight]{./img/vuejs-logo-17D586B587-seeklogo.com.png}
-    \caption{Laravel logo}
-    \label{fig:exemplo-imagem}
-    \item Vuex: Biblioteca utilizada gerenciamento de estado para aplicações Vue.js
+     \item Vuex: Biblioteca utilizada gerenciamento de estado para aplicações Vue.js
     \item Bootstrap: Biblioteca utilizada para estilização básica das views .blade
     \item Tailwind: Biblioteca utilizada para estilização básica do component do chat
+    \begin{figure}[h!] 
+    \centering
+    \includegraphics[width=0.3\textwidth, height=0.3\textheight]{./img/vuejs-logo-17D586B587-seeklogo.com.png}
+    \caption{Vue logo}
+    \label{fig:exemplo-imagem}
+   
 \end{figure}
 
-
-
-
-
 \end{itemize}
-
 
